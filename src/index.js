@@ -1,9 +1,12 @@
 const { isUtf8 } = require('buffer');
 const express = require('express');
 const app = express();
-const port = 8000;
+const port = 8001;
 
 const userRoute = require("./routes/users")
+// Servir des fichiers statiques
+
+app.use(express.static('public'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,6 +42,9 @@ app.get('/express', (req, res) => {
 app.get('/user/:id', (req, res) => {
   res.send(`Utilisateur avec ID ${req.params.id}`);
 });
+
+
+
 
 
 
