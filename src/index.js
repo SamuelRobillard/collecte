@@ -1,4 +1,4 @@
-const { isUtf8 } = require('buffer');
+
 const express = require('express');
 const app = express();
 const port = 8001;
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/express', (req, res) => {
-  res.send('Helo, express!');
+  res.send('Hello, express!');
 });
 
 app.get('/user/:id', (req, res) => {

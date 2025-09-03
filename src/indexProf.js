@@ -3,11 +3,11 @@ const winston = require('winston');
 const app = express();
 const port = 3000;
 // supprimer si bug et le fichier connectDB.js
-let  connectDB = () => {
-  require("./connectDB")
-} 
+// let  connectDB = () => {
+//   require("./connectDB")
+// } 
 
-connectDB()
+// connectDB()
 
 
 // Configuration du logger avec Winston
@@ -30,6 +30,10 @@ app.use((req, res, next) => {
 });
 const userRoute = require("../src/routes/users")
 // Servir des fichiers statiques
+
+// les routes extrene prenne le dessus sur les routes de base
+
+
 app.use(express.static('./src/public'));
 app.use(userRoute)
 
@@ -64,17 +68,17 @@ app.post('/envoie', (req, res) => {
 })
 
 
-const MongoClient = require("mongodb").MongoClient;
+// const MongoClient = require("mongodb").MongoClient;
 
-MongoClient.connect("mongodb://localhost:27017/animals", (err, client) => {
-  if (err) throw err;
-  let db = client.db("animals");
-  db.collection("mammals").find().toArray((err, result) => {
-    if (err) throw err;
-    console.log(result);
-    client.close();
-  });
-});
+// MongoClient.connect("mongodb://localhost:27017/animals", (err, client) => {
+//   if (err) throw err;
+//   let db = client.db("animals");
+//   db.collection("mammals").find().toArray((err, result) => {
+//     if (err) throw err;
+//     console.log(result);
+//     client.close();
+//   });
+// });
 
 
 
