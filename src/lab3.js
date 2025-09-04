@@ -1,13 +1,23 @@
 // server.js
 const express = require('express');
+
 const app = express();
 app.use(express.json());
 
 // ===== Middleware de log (ligne de requête) =====
+
+const win = require('./winston/lab3Winston')
+
+const logger = win
+
+// Middleware de logging utilisant Winston
 app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
+  logger.info(`${req.method} ${req.url}`);
   next();
 });
+
+
+
 const routeCrud = require("../src/routes/crud")
 // Servir des fichiers statiques
 
