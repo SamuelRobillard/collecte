@@ -20,7 +20,7 @@ router.post('/register', async (req : Request, res: Response) => {
 
 
 router.post('/login', async (req, res) => {
-    const users : UserModel[] = UserService.getAllUsersList()
+    const users : UserModel[] = await UserService.getAllUsersList()
     const user = users.find(user => user.username === req.body.username);
     if (user && await bcrypt.compare(req.body.password, user.password)) {
         const accessToken = jwt.sign({ username: user.username }, 'SECRET_KEY', { expiresIn: '1h' });

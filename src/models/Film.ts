@@ -1,9 +1,11 @@
 export default class Film{
+    id : Number
     titre: string
     annee: number
     desc: string
 
-    constructor(titre : string, annee : number, desc : string){
+    constructor(id : Number, titre : string, annee : number, desc : string){
+        this.id = id
         this.titre = titre
         this.annee = annee
         this.desc = desc

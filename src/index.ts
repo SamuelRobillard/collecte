@@ -1,5 +1,5 @@
 import express, {Request, Response} from "express";
-import Film from "./Film";
+import Film from "./models/Film";
 import Exo1Regex from "./Exo1Regex";
 import userRoutes from '../src/routes/user.routes';
 
@@ -9,9 +9,9 @@ const port = 8000;
 app.use(express.json())
 app.use('/api', userRoutes)
 
-let film1 : Film = new Film("tt", 22, "asd");
-let film2 : Film = new Film("tsst", 222, "asssd");
-let film3 : Film = new Film("tsst", 222, "asssd");
+let film1 : Film = new Film(1,"tt", 22, "asd");
+let film2 : Film = new Film(2,"tsst", 222, "asssd");
+let film3 : Film = new Film(3,"tsst", 222, "asssd");
 let films : Array<Film> = [film1, film2, film3]
 
 app.get('/films',  (req: Request, res: Response)=>{

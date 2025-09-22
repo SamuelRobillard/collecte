@@ -7,7 +7,7 @@ export class UserController {
     const users = await UserService.getAllUsers();
     res.json(users);
   }
-  public createUser(UserModel : UserModel): boolean {
+  public async createUser(UserModel : UserModel): Promise<boolean> {
     
    return UserService.createUser(UserModel)
   }

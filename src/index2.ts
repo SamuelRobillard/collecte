@@ -1,21 +1,23 @@
 import { UserModel } from "./models/user.model";
 import express, {Request, Response} from 'express';
 import userRoutes from '../src/routes/user.routes';
-
+import filmRoutes from '../src/routes/film.routes'
 import fs from "fs"
 import https from "https"
 import path from "path";
+import swaggerUi from 'swagger-ui-express';
 
+import swaggerRoute from "../src/routes/routes.swagger";
+import swaggerDocument from  '../swagger.json';
 
 
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use('/api', userRoutes)
+app.use('/api2', filmRoutes)
+app.use("/api3", swaggerRoute)
 const users : UserModel[] = []; // Simuler une base de données en mémoire
-
-
-
 
 
 
@@ -24,8 +26,22 @@ const options = {
   cert: fs.readFileSync(path.join("../collecte", 'cert.pem'))
 };
 
-// Middleware JSON
+
+
+// Servir la documentation Swagger via '/api-docs'
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// Autres routes et middleware Express
 app.use(express.json());
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello, TypeScript with Express! Connexion sécurisée.');
+});
+
+
+
+
+
 
 // Route simple pour tester
 app.get('/', (req, res) => {
