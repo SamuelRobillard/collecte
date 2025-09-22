@@ -1,16 +1,15 @@
-export default class Film{
-    id : Number
-    titre: string
-    annee: number
-    desc: string
+import Media from "./Media"
 
-    constructor(id : Number, titre : string, annee : number, desc : string){
-        this.id = id
-        this.titre = titre
-        this.annee = annee
-        this.desc = desc
+export default class Film extends Media{
+    
+    duration : Number
+    watched : boolean
+    constructor(id : string, titre : string, genre : string, year : Number, rating : Number, duaration : Number, watched: boolean){
+       super(id, titre, genre, year, rating )
+       this.duration = duaration;
+       this.watched = watched;
     }   
-    toString() : string {
-        return `Titre: ${this.titre}, Annee: ${this.annee}, desc: ${this.desc}`
-    }
+   getSummary(): string {
+      return Film.toString()
+   }
 }

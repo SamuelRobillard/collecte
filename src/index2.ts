@@ -22,8 +22,8 @@ const users : UserModel[] = []; // Simuler une base de données en mémoire
 
 
 const options = {
-  key: fs.readFileSync(path.join("../collecte", 'key.pem')),
-  cert: fs.readFileSync(path.join("../collecte", 'cert.pem'))
+  key: fs.readFileSync(path.join("./", 'key.pem')),
+  cert: fs.readFileSync(path.join("./", 'cert.pem'))
 };
 
 
