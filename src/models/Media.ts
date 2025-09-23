@@ -1,4 +1,8 @@
+
+
 export default abstract class Media {
+    
+    abstract type : string
     id: string;
     titre: string;
     genre: string;
@@ -6,6 +10,7 @@ export default abstract class Media {
     rating : Number;
 
     constructor(id: string, titre: string, genre: string, year : Number, rating : Number) {
+        
         this.id = id;
         this.titre = titre;
         this.genre = genre;

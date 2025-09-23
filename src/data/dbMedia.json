@@ -1,0 +1,21 @@
+[
+  {
+    "id": "1",
+    "titre": "É",
+    "genre": "adÉ",
+    "year": 2,
+    "rating": 200,
+    "duration": 200,
+    "watched": true
+  },
+  {
+    "id": "2",
+    "titre": "É",
+    "genre": "adÉ",
+    "year": 2,
+    "rating": 200,
+    "type": "film",
+    "duration": 200,
+    "watched": true
+  }
+]

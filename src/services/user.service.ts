@@ -1,6 +1,7 @@
 import { json } from 'stream/consumers';
 import User from '../models/User';
 import { UserModel } from '../models/user.model';
+import ValidationRegexService from './validationRegexService';
 
 const fsPromise = require('fs').promises;
 const fileName : string = "./src/data/dbUsers.json";
@@ -41,6 +42,7 @@ export class UserService {
   private static users : User[] = []
  
   public static async createUser(user : User): Promise<boolean> {
+    
     this.users.push(user)
     
     await writeFileAsync(this.users)

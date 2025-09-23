@@ -3,6 +3,7 @@ import express, {Request, Response} from 'express';
 import userRoutes from '../src/routes/user.routes';
 import filmRoutes from '../src/routes/film.routes'
 import loggerRoute from "../src/routes/logger.routes"
+import mediaRoute from "../src/routes/Media.routes"
 import fs from "fs"
 import https from "https"
 import path from "path";
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use('/api', userRoutes)
+app.use('/api', mediaRoute)
 app.use('/api', loggerRoute)
 app.use('/api2', filmRoutes)
 app.use("/api3", swaggerRoute)
