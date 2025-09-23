@@ -1,21 +1,29 @@
-import { User } from '../interfaces/user.interface';
+import { json } from 'stream/consumers';
+import User from '../models/User';
 import { UserModel } from '../models/user.model';
 
 const fsPromise = require('fs').promises;
-const fileName : string = "../db.json";
+const fileName : string = "./src/data/dbUsers.json";
 
 
 
-
-
-
-
-async function writeFileAsync(use : string) {
+async function readFile(): Promise<User[]> {
   try {
-    await fsPromise.writeFile('./src/data/db.json', use );
-    console.log("written");
+    const data = await fsPromise.readFile(fileName, "utf8");
+    return JSON.parse(data) || [];
   } catch (err) {
-    console.error(err);
+    console.error("Erreur lecture fichier:", err);
+    return [];
+  }
+}
+
+
+async function writeFileAsync(users: User[]): Promise<void> {
+  try {
+    await fsPromise.writeFile(fileName, JSON.stringify(users, null, 2));
+    console.log("Fichier écrit avec succès !");
+  } catch (err) {
+    console.error("Erreur écriture fichier:", err);
   }
 }
 export class UserService {
@@ -30,20 +38,29 @@ export class UserService {
  
 
 
-  public static users : UserModel [] = [new UserModel(1, 'John Doe', 'john.doe@example.com', "pass")]
-  public static async getAllUsers(): Promise<UserModel[]> {
-    // Logique pour récupérer tous les utilisateurs
-    return this.users;
-  }
-  public static createUser(UserModel : UserModel): boolean {
-    this.users.push(UserModel)
-    const jsonString: string = JSON.stringify(this.users);
-    writeFileAsync(jsonString)
+  private static users : User[] = []
+ 
+  public static async createUser(user : User): Promise<boolean> {
+    this.users.push(user)
+    
+    await writeFileAsync(this.users)
     
     return true
   }
-   public static  getAllUsersList(): UserModel[] {
+
+   public static async initAsync() {
+    this.users = await readFile();
+  }
+
+   public static  getAllUsers(): User[]{
     // Logique pour récupérer tous les utilisateurs
+    
     return this.users;
   }
+  public static getMaxId(): number {
+  if (this.users.length === 0) return 0;
+
+  return Math.max(...this.users.map(user => Number(user.id)));
+}
+  
 }

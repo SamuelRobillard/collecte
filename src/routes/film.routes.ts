@@ -12,9 +12,10 @@ const router = Router();
 
 
 
-let film1 : Film = new Film(1,"tt", 22, "asd");
-let film2 : Film = new Film(2,"tsst", 222, "asssd");
-let film3 : Film = new Film(3,"tsst", 222, "asssd");
+let film1 : Film = new Film("1","tt", "2", 2, 2, 2, true);
+let film2 : Film = new Film("2","tt", "2", 2, 2, 2, true);
+let film3 : Film = new Film("3","tt", "2", 2, 2, 2, true);
+
 let films : Array<Film> = [film1, film2, film3]
 
 router.get('/films',  (req: Request, res: Response)=>{
@@ -24,9 +25,9 @@ router.get('/films',  (req: Request, res: Response)=>{
 });
 router.get('/films/annee/:annee',  (req: Request, res: Response)=>{
     let filtreAnnee : Array<Film> = [];
-    let anneeTempo : number = Number(req.params.annee);
+    let anneeTempo : number = Number(req.params.year);
     films.forEach((value: Film) => {
-        if(anneeTempo == value.annee){
+        if(anneeTempo == value.year){
             filtreAnnee.push(value);
         }
 
