@@ -1,5 +1,5 @@
 import { User } from '../interfaces/user.interface';
-import { UserModel } from '../models/user.model';
+import { userModelV2 } from '../models/user.model.v2';
 
 const fsPromise = require('fs').promises;
 const fileName : string = "../db.json";
@@ -18,7 +18,7 @@ async function writeFileAsync(use : string) {
     console.error(err);
   }
 }
-export class UserService {
+export class UserServiceV2 {
   
   
   
@@ -30,19 +30,19 @@ export class UserService {
  
 
 
-  public static users : UserModel [] = [new UserModel(1, 'John Doe', 'john.doe@example.com', "pass")]
-  public static async getAllUsers(): Promise<UserModel[]> {
+  public static users : userModelV2 [] = [new userModelV2(1, 'John Doe')]
+  public static async getAllUsers(): Promise<userModelV2[]> {
     // Logique pour récupérer tous les utilisateurs
     return this.users;
   }
-  public static createUser(UserModel : UserModel): boolean {
-    this.users.push(UserModel)
+  public static createUser(userModelV2 : userModelV2): boolean {
+    this.users.push(userModelV2)
     const jsonString: string = JSON.stringify(this.users);
     writeFileAsync(jsonString)
     
     return true
   }
-   public static  getAllUsersList(): UserModel[] {
+   public static  getAllUsersList(): userModelV2[] {
     // Logique pour récupérer tous les utilisateurs
     return this.users;
   }

@@ -1,15 +1,16 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/user.controller';
 import express, {Request, Response} from 'express';
-
+import { UserControllerV2 } from '../controllers/user.Controller.v2';
 import bcrypt from "bcryptjs";
 import { UserService } from '../services/user.service';
 import { UserModel } from '../models/user.model';
 import  jwt from 'jsonwebtoken';
 const router = Router();
 const userController = new UserController();
+const userControllerv2 = new UserControllerV2();
 
-router.get('/users', userController.getAllUsers);
+router.get('/users', userControllerv2.getAllUsers);
 
 router.post('/users', async (req : Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -30,7 +31,7 @@ router.post('/login', async (req, res) => {
     }
 });
 router.delete('/users/:id', async (req, res) => {
-    if(await userController.deleteUser(req.params.id)){
+    if(await userControllerv2.deleteUser(req.params.id)){
         res.status(201).send("user deleted")
     }
     else{

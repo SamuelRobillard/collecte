@@ -1,20 +1,24 @@
 import { UserModel } from "./models/user.model";
 import express, {Request, Response} from 'express';
-import userRoutes from '../src/routes/user.routes';
-import filmRoutes from '../src/routes/film.routes'
+import userRoutes from './routes/user.routes';
+import userRoutesv2 from "./routes/user.routes.v2"
+import filmRoutes from './routes/film.routes'
 import fs from "fs"
 import https from "https"
 import path from "path";
 import swaggerUi from 'swagger-ui-express';
-
-import swaggerRoute from "../src/routes/routes.swagger";
+import http  from 'http'
+import swaggerRoute from "./routes/routes.swagger";
 import swaggerDocument from  '../swagger.json';
 
 
 const app = express();
 const port = process.env.PORT || 3000;
+const httpPort = process.env.HTTP_PORT || 80;
+
 app.use(express.json());
-app.use('/api', userRoutes)
+app.use('/api/v1', userRoutes)
+app.use('/api/v2', userRoutesv2)
 app.use('/api2', filmRoutes)
 app.use("/api3", swaggerRoute)
 const users : UserModel[] = []; // Simuler une base de données en mémoire
@@ -51,4 +55,11 @@ app.get('/', (req, res) => {
 // Créer le serveur HTTPS
 https.createServer(options, app).listen(port, () => {
   console.log(`Serveur HTTPS en écoute sur <https://localhost>:${port}`);
+});
+
+http.createServer((req, res) => {
+  res.writeHead(301, { "Location": `https://localhost:${port}${req.url}` });
+  res.end();
+}).listen(httpPort, () => {
+  console.log(`Serveur HTTP en écoute sur <http://localhost>:${httpPort}`);
 });

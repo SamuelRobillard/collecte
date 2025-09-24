@@ -1,7 +1,7 @@
 import express, {Request, Response} from "express";
 import Film from "./models/Film";
 import Exo1Regex from "./Exo1Regex";
-import userRoutes from '../src/routes/user.routes';
+import userRoutes from './routes/user.routes';
 
 
 const app = express();
