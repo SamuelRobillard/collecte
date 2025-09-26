@@ -12,28 +12,38 @@ const userController = new UserController();
 
 router.get('/users', userController.getAllUsers);
 
-router.post('/register', async (req : Request, res: Response) => {
+router.post('/users', async (req : Request, res: Response) => {
     await UserService.initAsync()
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const role = req.body.role
     const username = req.body.username
-    
-    const id = (UserService.getMaxId() + 1).toString()
+    const email = req.body.email
+    const users : User[] = await UserService.getAllUsers()
+    const userFound = users.find(user => user.email === req.body.email);
+    if(userFound !== undefined){
+        
+        res.status(400).send("email deja enregistré")
+    }
+    else{
+       const id = (UserService.getMaxId() + 1).toString()
+
     const media : Media[] = [];
-    const user = new User(id, username,  "asd@gmail.com",  hashedPassword, role, media );
+    const user = new User(id, username,  email,  hashedPassword, role, media );
     userController.createUser(user)
-    res.status(201).send('Utilisateur enregistré');
+    res.status(201).send('Utilisateur enregistré'); 
+    }
+    
 });
 
 
 router.post('/login', async (req, res) => {
     const users : User[] = await UserService.getAllUsers()
-    const user = users.find(user => user === req.body.username);
+    const user = users.find(user => user.email === req.body.email);
     if (user && await bcrypt.compare(req.body.password, user.password)) {
-        const accessToken = jwt.sign({ username: user.username }, 'SECRET_KEY', { expiresIn: '1h' });
+        const accessToken = jwt.sign({ email: user.email }, 'SECRET_KEY', { expiresIn: '1h' });
         res.json({ accessToken });
     } else {
-        res.status(403).send('Nom d’utilisateur ou mot de passe incorrect');
+        res.status(403).send('email ou mot de passe incorrect');
     }
 });
 export default router;

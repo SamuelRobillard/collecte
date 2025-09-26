@@ -8,9 +8,16 @@ export default class MediaController {
     const users = await MediaService.getAllMedias();
     res.json(users);
   }
-  public static async createUser(media : Media): Promise<boolean> {
+  public static async createMedia(media : Media): Promise<boolean> {
     
   await MediaService.initAsync()
    return MediaService.createMedia(media)
   }
+
+
+    public static  async deleteMedia(idtoRemove : string | undefined): Promise<boolean> {
+    
+    return MediaService.deleteMedia(idtoRemove)
+   }
+
 }

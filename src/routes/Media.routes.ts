@@ -10,30 +10,69 @@ import Media from '../models/Media';
 import { MediaService } from '../services/MediaService';
 import MediaController from '../controllers/mediaController';
 import Film from '../models/Film';
+import Serie from '../models/Serie';
+import Saison from '../models/Saison';
+import Episode from '../models/Episode';
+import { validateMedia } from '../middleswares/auth.middleware';
 const router = Router();
 
 
 router.get('/medias', MediaController.getAllMedia)
 
-router.post('/medias', async (req : Request, res: Response) => {
+router.post('/medias', validateMedia, async (req : Request, res: Response) => {
     await MediaService.initAsync()
-    
+    const type = req.body.type
     const titre = req.body.titre
     const genre = req.body.genre
     const year = req.body.year
     const rating = req.body.rating
-    const duaration = req.body.duration
-    const watched = req.body.watched
-   
+    
+    
     
     const id = (MediaService.getMaxId() + 1).toString()
+    if(type == "film"){
+        const duaration = req.body.duration
+        const watched = req.body.watched
+        const media = new Film(id, titre, genre,  year, rating, duaration, watched);
+        MediaController.createMedia(media)
+        res.status(201).send('Utilisateur enregistré');
+    }
+    else if (type == "serie"){
+        const status = req.body.status
+        const saisons = req.body.saisons
+        const saisonList = saisons.map(
+      (saison: Saison) =>
+       
+        new Saison(
+          saison.seasonNumber,
+          saison.releaseDate,
+          
+          saison.episodes.map((episode: Episode) => new Episode(episode.id, episode.title, episode.duration, episode.episodeNumber, episode.watched))
+        )
+
+    );
+        const media = new Serie(id, titre, genre,  year, rating, status, saisonList);
+        MediaController.createMedia(media)
+        res.status(201).send('Utilisateur enregistré');
+    }
+    else{
+      res.status(400).send('type non valide');  
+    }
     
-    const user = new Film(id, titre, genre,  year, rating, duaration, watched);
-    MediaController.createUser(user)
-    res.status(201).send('Utilisateur enregistré');
 });
 
-
+router.delete('/medias/:id', async (req, res) => {
+    await MediaService.initAsync()
+    if(await MediaController.deleteMedia(req.params.id)){
+        res.status(201).send("Média deleted")
+    }
+    else{
+         res.status(403).send('id non valide');
+    }
+    
+       
+    
+});
 
 
 export default router;

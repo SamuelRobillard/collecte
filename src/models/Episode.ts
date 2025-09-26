@@ -1,12 +1,12 @@
 export default class Episode {
     id : string;
     title: string;
-    duration : number;
+    duration : Number;
     episodeNumber : Number;
     watched : boolean;
 
 
-    constructor(id : string, title : string, duration : number, episodeNumber : number, watched :  boolean){
+    constructor(id : string, title : string, duration : Number, episodeNumber : Number, watched :  boolean){
         this.id = id;
         this.title = title;
         this.duration = duration;

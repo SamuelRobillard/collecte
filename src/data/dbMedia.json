@@ -1,12 +1,27 @@
 [
   {
     "id": "1",
-    "titre": "É",
-    "genre": "adÉ",
+    "titre": "aaaa111222sss",
+    "genre": "ad",
     "year": 2,
     "rating": 200,
-    "duration": 200,
-    "watched": true
+    "type": "serie",
+    "status": "en_attente",
+    "saisons": [
+      {
+        "seasonNumber": 1,
+        "releaseDate": 1,
+        "episodes": [
+          {
+            "id": "1",
+            "title": "addad",
+            "duration": 1435,
+            "episodeNumber": 1,
+            "watched": true
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "2",
@@ -17,5 +32,29 @@
     "type": "film",
     "duration": 200,
     "watched": true
+  },
+  {
+    "id": "4",
+    "titre": "aaaa111222sss",
+    "genre": "ad",
+    "year": 2,
+    "rating": 200,
+    "type": "serie",
+    "status": "en_attente",
+    "saisons": [
+      {
+        "seasonNumber": 1,
+        "releaseDate": 1,
+        "episodes": [
+          {
+            "id": "1",
+            "title": "addad",
+            "duration": 1435,
+            "episodeNumber": 1,
+            "watched": true
+          }
+        ]
+      }
+    ]
   }
 ]

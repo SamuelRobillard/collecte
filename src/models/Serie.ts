@@ -2,7 +2,7 @@ import Media from "./Media"
 import Saison from "./Saison";
 
 
-class Serie extends Media{
+export default class Serie extends Media{
     type : string
     status: string
     saisons : Saison[]

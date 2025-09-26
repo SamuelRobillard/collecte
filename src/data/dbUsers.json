@@ -1,65 +1,25 @@
 [
   {
-    "id": 1,
-    "username": "John Doe",
-    "email": "john.doe@example.com",
-    "password": "pass"
-  },
-  {
-    "id": 2,
-    "email": "asd@gmail.com",
-    "username": "jasdadj",
-    "password": "$2b$10$9eYeGSjIkUTj0hrCi0xojeuNLxOvdRHEW47ZK3DBOf1vJGohsqVXq"
-  },
-  {
-    "id": 3,
-    "email": "asd@gmail.com",
-    "username": "É",
-    "password": "$2b$10$TqCfaTphBStnO/Tn1nlE3eKIF4ywKGhvmPY0oC9Iakli0rBfrbvDW"
-  },
-  {
-    "id": 4,
-    "email": "asd@gmail.com",
-    "username": "É",
-    "password": "$2b$10$wfUlK/7gL0lLVX8DKUT7buW4a8ZLqJUg.gRw8x0N85ldjdv7iYWG."
-  },
-  {
     "id": "1",
-    "username": "É",
-    "email": "asd@gmail.com",
-    "password": "$2b$10$2TnyU1CjyLK15NDD1cFgpODP22WV3CFiWJGH.hYhT2rjqAQSW3ohK",
+    "username": "John Does",
+    "email": "asasd@gmail.com",
+    "password": "$2b$10$E4678YamoXmetlWmzYnnku68pZEXHWHgehwVFub3f6bN3l.dOVrMS",
     "role": "user",
     "favorites": []
   },
   {
-    "id": "1",
-    "username": "É",
-    "email": "asd@gmail.com",
-    "password": "$2b$10$bYO6se3nOuNERBR7bQcoT.1.AJyHikFMrn3f4SS.hs9RaFEyokFIK",
+    "id": "2",
+    "username": "John Does",
+    "email": "asasdsas@gmail.com",
+    "password": "$2b$10$Sh/5R15d6LMzgXJRFodHKeRraSNgOKIoJiWlOezo2WyMM4bGRdjrG",
     "role": "user",
     "favorites": []
   },
   {
-    "id": "1",
-    "username": "É",
-    "email": "asd@gmail.com",
-    "password": "$2b$10$ntDvnTH5GI4Icd8IitE70.up0JtnxhHfpcRXhiWo606el6gf5WAXW",
-    "role": "user",
-    "favorites": []
-  },
-  {
-    "id": "5",
-    "username": "É",
-    "email": "asd@gmail.com",
-    "password": "$2b$10$MoImTACB3/XUcF5OqQlB3uyNXyEAyIdH3H89wADD6FKSg4HEH89.6",
-    "role": "user",
-    "favorites": []
-  },
-  {
-    "id": "6",
-    "username": "É",
-    "email": "asd@gmail.com",
-    "password": "$2b$10$7cJll/QA9s3kG8Jc.O550.eddQYhJ6env2WyXhfcTPbQ0a736zJde",
+    "id": "3",
+    "username": "John Does",
+    "email": "asasdsssas@gmail.com",
+    "password": "$2b$10$4b412GXAMosJlHdkjLAAQecS6FHEGtlRvKKAMaJmBRKDXKTP0E7nC",
     "role": "user",
     "favorites": []
   }

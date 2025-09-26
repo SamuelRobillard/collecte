@@ -42,30 +42,46 @@ export class MediaService {
  
 
 
-  private static users : Media[] = []
+  private static medias : Media[] = []
  
   public static async createMedia(user : Media): Promise<boolean> {
     
-    this.users.push(user)
+    this.medias.push(user)
     
-    await writeFileAsync(this.users)
+    await writeFileAsync(this.medias)
     
     return true
   }
 
    public static async initAsync() {
-    this.users = await readFile();
+    this.medias = await readFile();
   }
 
    public static  getAllMedias(): Media[]{
     // Logique pour récupérer tous les utilisateurs
     
-    return this.users;
+    return this.medias;
   }
-  public static getMaxId(): number {
-  if (this.users.length === 0) return 0;
 
-  return Math.max(...this.users.map(user => Number(user.id)));
+ public static  deleteMedia(idtoRemove : string | undefined):boolean {
+    
+    
+    try{
+      this.medias = this.medias.filter(item => item.id !== idtoRemove);
+      
+      writeFileAsync(this.medias)
+      return true;
+    }
+    
+    catch{
+      return false;
+    }
+  }
+
+  public static getMaxId(): number {
+  if (this.medias.length === 0) return 0;
+
+  return Math.max(...this.medias.map(user => Number(user.id)));
 }
   
 }

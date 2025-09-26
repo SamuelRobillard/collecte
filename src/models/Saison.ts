@@ -5,7 +5,7 @@ export default class Saison {
     releaseDate : Date;
     episodes : Episode[]
 
-    constructor(seasonNumber : number, realeaseDate : Date, episodes : Episode[]){
+    constructor(seasonNumber : Number, realeaseDate : Date, episodes : Episode[]){
         this.seasonNumber = seasonNumber;
         this.releaseDate = realeaseDate;
         this.episodes = episodes;
