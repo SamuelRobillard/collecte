@@ -1,13 +1,15 @@
 import Episode from "./Episode";
 
 export default class Saison {
+    id : string;
     seasonNumber : Number;
     releaseDate : Date;
-    episodes : Episode[]
+    episodesId : String []
 
-    constructor(seasonNumber : Number, realeaseDate : Date, episodes : Episode[]){
+    constructor(id : string, seasonNumber : Number, realeaseDate : Date, episodesId : String[]){
+        this.id = id;
         this.seasonNumber = seasonNumber;
         this.releaseDate = realeaseDate;
-        this.episodes = episodes;
+        this.episodesId = episodesId;
     }
 }

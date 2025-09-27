@@ -4,6 +4,8 @@ import userRoutes from '../src/routes/user.routes';
 import filmRoutes from '../src/routes/film.routes'
 import loggerRoute from "../src/routes/logger.routes"
 import mediaRoute from "../src/routes/Media.routes"
+import episodeRoute from "../src/routes/EpisodeRoute"
+import saisonRoute from "../src/routes/SaisonRoute"
 import fs from "fs"
 import https from "https"
 import path from "path";
@@ -31,6 +33,8 @@ app.use(express.json());
 app.use('/api', userRoutes)
 app.use('/api', mediaRoute)
 app.use('/api', loggerRoute)
+app.use('/api', episodeRoute)
+app.use('/api', saisonRoute)
 app.use('/api2', filmRoutes)
 app.use("/api3", swaggerRoute)
 const users : UserModel[] = []; // Simuler une base de données en mémoire

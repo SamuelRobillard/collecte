@@ -2,34 +2,14 @@ import { json } from 'stream/consumers';
 import User from '../models/User';
 import Media from '../models/Media';
 import ValidationRegexService from './validationRegexService';
+import { readData, writeData } from '../utils/jsonHandler';
 
 const fsPromise = require('fs').promises;
 const fileName : string = "./src/data/dbMedia.json";
 
 
 
-async function readFile(): Promise<Media[]> {
-  try {
-    const data = await fsPromise.readFile(fileName, "utf8");
-    if(data !== null){
-       return JSON.parse(data) || []; 
-    }
-    return []
-  } catch (err) {
-    console.error("Erreur lecture fichier:", err);
-    return [];
-  }
-}
 
-
-async function writeFileAsync(medias: Media[]): Promise<void> {
-  try {
-    await fsPromise.writeFile(fileName, JSON.stringify(medias, null, 2));
-    console.log("Fichier écrit avec succès !");
-  } catch (err) {
-    console.error("Erreur écriture fichier:", err);
-  }
-}
 export class MediaService {
   
   
@@ -42,34 +22,38 @@ export class MediaService {
  
 
 
-  private static medias : Media[] = []
+  
  
   public static async createMedia(user : Media): Promise<boolean> {
+    const data = await readData();
+    data.medias.push(user)
+    writeData(data)
     
-    this.medias.push(user)
-    
-    await writeFileAsync(this.medias)
+   
     
     return true
   }
 
-   public static async initAsync() {
-    this.medias = await readFile();
-  }
+  //  public static async initAsync() {
+  //   this.medias = await readFile();
+  // }
 
    public static  getAllMedias(): Media[]{
     // Logique pour récupérer tous les utilisateurs
     
-    return this.medias;
+    const data = readData();
+    return data.medias;
   }
 
  public static  deleteMedia(idtoRemove : string | undefined):boolean {
     
+    const data = readData()
     
     try{
-      this.medias = this.medias.filter(item => item.id !== idtoRemove);
       
-      writeFileAsync(this.medias)
+      data.medias = data.medias.filter((item: any) => item.id !== idtoRemove);
+      
+      writeData(data)
       return true;
     }
     
@@ -79,9 +63,11 @@ export class MediaService {
   }
 
   public static getMaxId(): number {
-  if (this.medias.length === 0) return 0;
+  const data = readData();
+  let medias = data.medias;
+  if (medias.length === 0) return 0;
 
-  return Math.max(...this.medias.map(user => Number(user.id)));
+  return Math.max(...medias.map((media: any) => Number(media.id)));
 }
   
 }
