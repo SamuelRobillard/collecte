@@ -1,40 +1,80 @@
-import express, {Request, Response} from "express";
-import Film from "./models/Film";
-import Exo1Regex from "./Exo1Regex";
-import userRoutes from '../src/routes/user.routes';
+import { UserModel } from "./models/user.model";
+import express, {Request, Response} from 'express';
+import userRoutes from './routes/user.routes';
+import loggerRoute from "./routes/logger.routes"
+import mediaRoute from "./routes/Media.routes"
+import episodeRoute from "./routes/EpisodeRoute"
+import saisonRoute from "./routes/SaisonRoute"
+import fs from "fs"
+import https from "https"
+import path from "path";
+import swaggerUi from 'swagger-ui-express';
+
+import swaggerRoute from "./routes/routes.swagger";
+import swaggerDocument from  '../swagger.json';
+import ValidationRegexService from "./services/validationRegexService";
+
+const win = require('./winston/winstonLogger.ts')
+
 
 
 const app = express();
-const port = 8000;
-app.use(express.json())
+const port = process.env.PORT || 3000;
+const logger = win
+
+// Middleware de logging utilisant Winston
+app.use((req, res, next) => {
+  logger.info(`${req.method} ${req.url}`);
+  
+  next();
+});
+app.use(express.json());
 app.use('/api', userRoutes)
+app.use('/api', mediaRoute)
+app.use('/api', loggerRoute)
+app.use('/api', episodeRoute)
+app.use('/api', saisonRoute)
 
-let film1 : Film = new Film(1,"tt", 22, "asd");
-let film2 : Film = new Film(2,"tsst", 222, "asssd");
-let film3 : Film = new Film(3,"tsst", 222, "asssd");
-let films : Array<Film> = [film1, film2, film3]
 
-app.get('/films',  (req: Request, res: Response)=>{
+const users : UserModel[] = []; // Simuler une base de données en mémoire
 
-    
-    res.send(films);
+
+
+const options = {
+  key: fs.readFileSync(path.join("./", 'key.pem')),
+  cert: fs.readFileSync(path.join("./", 'cert.pem'))
+};
+
+
+
+// Servir la documentation Swagger via '/api-docs'
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// Autres routes et middleware Express
+app.use(express.json());
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello, TypeScript with Express! Connexion sécurisée.');
 });
-app.get('/films/annee/:annee',  (req: Request, res: Response)=>{
-    let filtreAnnee : Array<Film> = [];
-    let anneeTempo : number = Number(req.params.annee);
-    films.forEach((value: Film) => {
-        if(anneeTempo == value.annee){
-            filtreAnnee.push(value);
-        }
 
-        
-    });
-    res.send(filtreAnnee);
-});
-app.listen(port, ()=>{
-    console.log(`Server is running on port ${port}`);
+
+
+
+
+
+// Route simple pour tester
+app.get('/', (req, res) => {
+  res.send('Connexion HTTPS sécurisée');
 });
 
-console.log(Exo1Regex.validatePassword("Pd1sssssss1!"))
-console.log(Exo1Regex.onlyNumberInPhone("   (514) - 23  4-  23  4"   ))
-console.log(Exo1Regex.cleanString(" ads     ads aaa   a "))
+// Créer le serveur HTTPS
+https.createServer(options, app).listen(port, () => {
+  console.log(`Serveur HTTPS en écoute sur <https://localhost>:${port}`);
+});
+
+
+
+
+
+
+

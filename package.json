@@ -4,7 +4,7 @@
   "description": "le gitignore provient du site topal node",
   "main": "index.js",
   "scripts": {
-    "start": "npx ts-node-dev src/index2.ts",
+    "start": "npx ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
