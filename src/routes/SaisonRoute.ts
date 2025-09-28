@@ -22,10 +22,14 @@ router.post('/saisons', async (req : Request, res: Response) => {
     
     const id = (SaisonService.getMaxId() + 1).toString()
    
-        
-        const saisons = new Saison(id,  seasonNumber , releaseDate , episodesId);
+        if(SaisonService.allIdExists(episodesId)){
+            const saisons = new Saison(id,  seasonNumber , releaseDate , episodesId);
         SaisonController.createSaison(saisons)
         res.status(201).send('saison enregistré');
+        }
+        else{
+            res.status(400).send('episode non existante');
+        }
     
    
     

@@ -50,10 +50,10 @@ export class SaisonService {
     const data = readData()
     
     try{
-      console.log(idtoRemove)
+      
       
       data.saisons  = data.saisons.filter((item: any) => item.id !== idtoRemove);
-      console.log(data.saisons)
+      
       writeData(data)
       return true;
     }
@@ -72,15 +72,22 @@ export class SaisonService {
 }
   
 
-    public static allIdExists(saisonsId : String[]) : boolean {
-    const data = readData()
+    public static allIdExists(saisonsIds : String[]) : boolean {
+    
+    const data = readData();
+    
     const existingSaisonIds = data.saisons.map((s: any) => s.id);
-
+    
+    
   // Vérifier que chaque id de saisonsId existe dans la BD
-    for (const saisonId of saisonsId) {
-    if (!existingSaisonIds.includes(saisonId)) {
+    for (const saisonId of saisonsIds) {
+
         
+        
+        
+    if (!existingSaisonIds.includes(saisonId)) {
         return false;
+        
       
     }
 

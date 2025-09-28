@@ -67,32 +67,3 @@ export function validateMedia(req: Request, res: Response, next: NextFunction) {
   
 }
 
-
-//  for (const saison of saisons) {
-//       if (
-//         typeof saison.seasonNumber !== "number" ||
-//         saison.seasonNumber <= 0
-        
-//       ) {
-//         return res.status(400).json({ error: "Chaque saison doit avoir au moins un episode" });
-//       }
-
-//       if (!Array.isArray(saison.episodes)) {
-//         return res.status(400).json({ error: "Chaque saison doit avoir une liste 'episodes'" });
-//       }
-
-//       for (const ep of saison.episodes) {
-//         if (
-//           typeof ep.id !== "string" ||
-
-//           typeof ep.episodeNumber !== "number" ||
-//           ep.episodeNumber <= 0 ||
-//           typeof ep.title !== "string" ||
-//           typeof ep.duration !== "number" ||
-//           ep.duration <= 0 ||
-//           typeof ep.watched !== "boolean"
-
-//         ) {
-//           return res.status(400).json({ error: "Chaque épisode doit avoir un id, un titre, un nombre,une durée et si elle à été vu ou pas" });
-//         }
-//       }

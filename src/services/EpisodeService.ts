@@ -68,5 +68,29 @@ export class EpisodeService {
 
   return Math.max(...episodes.map((episode: any) => Number(episode.id)));
 }
+
+
+public static allIdExists(episodesId : String[]) : boolean {
+    
+    const data = readData();
+    
+    const existingEpisodesIds = data.episodes.map((s: any) => s.id);
+    
+    
+  // Vérifier que chaque id de saisonsId existe dans la BD
+    for (const episodeId of episodesId) {
+
+        
+        
+        
+    if (!existingEpisodesIds.includes(episodeId)) {
+        return false;
+        
+      
+    }
+
+  }
+  return true;
+    }
   
 }

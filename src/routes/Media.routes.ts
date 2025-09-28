@@ -58,6 +58,31 @@ router.post('/medias', validateMedia, async (req : Request, res: Response) => {
     
 });
 
+
+router.put('/medias/:id', async (req : Request, res: Response) => {
+    
+   
+    
+    
+    
+    const id = req.params.id
+    if(typeof(id) == "string"){
+   
+        
+        MediaService.updateMedia(id, req.body)
+        res.status(201).send('Utilisateur modifier');
+    }
+     
+      
+    
+        
+    
+    else{
+      res.status(400).send('id non valide');  
+    }
+    
+});
+
 router.delete('/medias/:id', async (req, res) => {
     
     if(await MediaController.deleteMedia(req.params.id)){
