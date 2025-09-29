@@ -2,8 +2,17 @@ import { Request, Response, NextFunction } from "express";
 import ValidationRegexService from "../services/validationRegexService";
 
 export function validateMedia(req: Request, res: Response, next: NextFunction) {
-  let { type, titre, genre, year, rating, duration, watched, status, saisonsId } = req.body;
+  
+  try{
+    let titreR = req.body.titre;
+    let titre = ValidationRegexService.cleanString(titreR)
+  }
+  catch {
+     return res.status(400).json({ error: "Titre manquant" });
+  }
 
+  
+  let { type, titre, genre, year, rating, duration, watched, status, saisonsId } = req.body;
   titre = ValidationRegexService.cleanString(titre)
   genre = ValidationRegexService.cleanString(genre)
   
@@ -32,11 +41,14 @@ export function validateMedia(req: Request, res: Response, next: NextFunction) {
   if (typeof year !== "number" || typeof rating !== "number") {
     return res.status(400).json({ error: "Champs 'year' et 'rating' doivent être des nombres" });
   }
-
+  const currentYear: number = new Date().getFullYear();
+  if(year > currentYear){
+    return res.status(400).json({ error: "Le champ year ne doit pas être supérieur a l'annee actuelle." });
+  }
   
   if (type === "film") {
     if (typeof duration !== "number" || duration <= 0) {
-      return res.status(400).json({ error: "Film: duration requise dois etre superieur à 0" });
+      return res.status(400).json({ error: "Film: duration requise et  dois etre superieur à 0" });
     }
     if (typeof watched !== "boolean") {
       return res.status(400).json({ error: "Film: watched doit être un vrai ou faux" });

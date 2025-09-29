@@ -87,11 +87,17 @@ export class MediaService {
     const data = readData();
     
     const existingMediasIds = data.medias.map((s: any) => s.id);
-    if (!existingMediasIds.includes(mediasId)) {
-        return false;
-     
+      mediasId.forEach((num: String, index: number) => {
+       if (!existingMediasIds.includes(index)) {
+       
+      
+      return false;
+
+    }});
+   
+   
   
-    }
+    console.log("yes")
     return true;
   }
 

@@ -1,18 +1,9 @@
 import { Router } from 'express';
-import { UserController } from '../controllers/user.controller';
 import express, {Request, Response} from 'express';
-import User from '../models/User';
-import bcrypt from "bcryptjs";
-import { UserService } from '../services/user.service';
-import { UserModel } from '../models/user.model';
-import  jwt from 'jsonwebtoken';
-import Media from '../models/Media';
 import { MediaService } from '../services/MediaService';
 import MediaController from '../controllers/mediaController';
 import Film from '../models/Film';
 import Serie from '../models/Serie';
-import Saison from '../models/Saison';
-import Episode from '../models/Episode';
 import { validateMedia } from '../middleswares/auth.middleware';
 import { SaisonService } from '../services/SaisonService';
 const router = Router();
@@ -36,7 +27,7 @@ router.post('/medias', validateMedia, async (req : Request, res: Response) => {
         const watched = req.body.watched
         const media = new Film(id, titre, genre,  year, rating, duaration, watched);
         MediaController.createMedia(media)
-        res.status(201).send('Utilisateur enregistré');
+        res.status(201).send('Media enregistré');
     }
     else if (type == "serie"){
         const status = req.body.status
@@ -45,7 +36,7 @@ router.post('/medias', validateMedia, async (req : Request, res: Response) => {
         if(SaisonService.allIdExists(saisonsId)){
           const media = new Serie(id, titre, genre,  year, rating, status, saisonsId);
         MediaController.createMedia(media)
-        res.status(201).send('Utilisateur enregistré');
+        res.status(201).send('Media enregistré');
         }
         else{
         res.status(400).send('saison non existante');  

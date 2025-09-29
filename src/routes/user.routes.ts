@@ -11,13 +11,14 @@ const router = Router();
 const userController = new UserController();
 
 router.get('/users', userController.getAllUsers);
-
+router.get('/users/:id/medias', userController.getAllMediaOfUser)
 router.post('/users', async (req : Request, res: Response) => {
-    await UserService.initAsync()
+   
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const role = req.body.role
     const username = req.body.username
     const email = req.body.email
+    const favorites = req.body.favorites
     const users : User[] = await UserService.getAllUsers()
     const userFound = users.find(user => user.email === req.body.email);
     if(userFound !== undefined){
@@ -27,8 +28,8 @@ router.post('/users', async (req : Request, res: Response) => {
     else{
        const id = (UserService.getMaxId() + 1).toString()
 
-    const media : Media[] = [];
-    const user = new User(id, username,  email,  hashedPassword, role, media );
+    
+    const user = new User(id, username,  email,  hashedPassword, role, favorites );
     userController.createUser(user)
     res.status(201).send('Utilisateur enregistré'); 
     }

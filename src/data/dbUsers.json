@@ -22,5 +22,29 @@
     "password": "$2b$10$4b412GXAMosJlHdkjLAAQecS6FHEGtlRvKKAMaJmBRKDXKTP0E7nC",
     "role": "user",
     "favorites": []
+  },
+  {
+    "id": "4",
+    "username": "John Does",
+    "email": "www@gmail.com",
+    "password": "$2b$10$dWVk8ctxs3gpNHcV6YBUNO2hdPsJVUSiLiS3T/IVE8WcY26YnQOqq",
+    "role": "user",
+    "favorites": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": "5",
+    "username": "John Does",
+    "email": "sss@gmail.com",
+    "password": "$2b$10$9BxF9Oz5Zof/Vbw9clc/o.wRL.6knJbT336VYI/U.bDoMNky7x73C",
+    "role": "user",
+    "favorites": [
+      1,
+      3,
+      5
+    ]
   }
 ]

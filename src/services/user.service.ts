@@ -2,31 +2,17 @@ import { json } from 'stream/consumers';
 import User from '../models/User';
 import { UserModel } from '../models/user.model';
 import ValidationRegexService from './validationRegexService';
+import { readDataUser, writeDataUser } from '../utils/jsonHandlerUser';
+import { readData, writeData } from '../utils/jsonHandler';
+import { MediaService } from './MediaService';
+import Media from '../models/Media';
 
 const fsPromise = require('fs').promises;
 const fileName : string = "./src/data/dbUsers.json";
 
 
 
-async function readFile(): Promise<User[]> {
-  try {
-    const data = await fsPromise.readFile(fileName, "utf8");
-    return JSON.parse(data) || [];
-  } catch (err) {
-    console.error("Erreur lecture fichier:", err);
-    return [];
-  }
-}
 
-
-async function writeFileAsync(users: User[]): Promise<void> {
-  try {
-    await fsPromise.writeFile(fileName, JSON.stringify(users, null, 2));
-    console.log("Fichier écrit avec succès !");
-  } catch (err) {
-    console.error("Erreur écriture fichier:", err);
-  }
-}
 export class UserService {
   
   
@@ -39,30 +25,71 @@ export class UserService {
  
 
 
-  private static users : User[] = []
+
  
   public static async createUser(user : User): Promise<boolean> {
+    const data = readDataUser();
+    data.push(user);
+    writeDataUser(data);
     
-    this.users.push(user)
-    
-    await writeFileAsync(this.users)
-    
-    return true
+    return true;
   }
 
-   public static async initAsync() {
-    this.users = await readFile();
-  }
+   
 
    public static  getAllUsers(): User[]{
     // Logique pour récupérer tous les utilisateurs
-    
-    return this.users;
+    const data = readDataUser();
+    return data;
   }
-  public static getMaxId(): number {
-  if (this.users.length === 0) return 0;
 
-  return Math.max(...this.users.map(user => Number(user.id)));
+
+  public static  getAllMediaOfUser(idUser : string | undefined): Media[] | string{
+    const data = readDataUser();
+   
+    
+    let users = data
+   
+    users = users.filter((item: any) => item.id == idUser);
+   
+    if(MediaService.idExists(users[0].favorites)){
+      const dataMedia = readData();
+      
+      
+      let datam = dataMedia.medias
+      let allMedia : Media []= [] 
+      
+      users[0].favorites.forEach((num: String, index: number) => {
+        const filteredMedias = datam.filter((media: { id: any; }) => media.id == num);
+        allMedia.push(filteredMedias)
+      })
+      
+
+      console.log(allMedia)
+        
+        
+      return allMedia
+      
+
+    }
+    
+      
+    
+    else{
+      return "media non existant"
+    }
+    
+    
+    
+  }
+
+  
+  public static getMaxId(): number {
+    const data = readDataUser();
+    let users = data
+  if (users.length === 0) return 0;
+
+  return Math.max(...users.map((user: { id: any; }) => Number(user.id)));
 }
   
 }

@@ -270,6 +270,82 @@
         "2",
         "3"
       ]
+    },
+    {
+      "id": "24",
+      "titre": "aaaa111222sss",
+      "genre": "drama",
+      "year": 2020,
+      "rating": 200,
+      "type": "serie",
+      "status": "en_attente",
+      "saisonsId": [
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "25",
+      "titre": "É",
+      "genre": "adÉ",
+      "year": 2,
+      "rating": 200,
+      "type": "film",
+      "duration": 200,
+      "watched": true
+    },
+    {
+      "id": "26",
+      "titre": "É",
+      "genre": "adÉ",
+      "year": 2,
+      "rating": 200,
+      "type": "film",
+      "duration": 200,
+      "watched": true
+    },
+    {
+      "id": "27",
+      "titre": "ads",
+      "genre": "adÉ",
+      "year": 200005,
+      "rating": 200,
+      "type": "film",
+      "duration": 200,
+      "watched": true
+    },
+    {
+      "id": "28",
+      "titre": "É",
+      "genre": "adÉ",
+      "year": 2,
+      "rating": 200,
+      "type": "film",
+      "duration": 200,
+      "watched": true
+    },
+    {
+      "id": "29",
+      "titre": "É",
+      "genre": "adÉ",
+      "year": 2,
+      "rating": 200,
+      "type": "film",
+      "duration": 200,
+      "watched": true
+    },
+    {
+      "id": "30",
+      "titre": "aaaa111222sss",
+      "genre": "drama",
+      "year": 2020,
+      "rating": 200,
+      "type": "serie",
+      "status": "en_attente",
+      "saisonsId": [
+        "2",
+        "3"
+      ]
     }
   ],
   "episodes": [
@@ -303,6 +379,13 @@
     },
     {
       "id": "7",
+      "title": "sss",
+      "duration": 1435,
+      "episodeNumber": 1,
+      "watched": true
+    },
+    {
+      "id": "8",
       "title": "sss",
       "duration": 1435,
       "episodeNumber": 1,
@@ -400,6 +483,30 @@
     },
     {
       "id": "13",
+      "releaseDate": "ssss",
+      "episodesId": [
+        "3",
+        "2"
+      ]
+    },
+    {
+      "id": "14",
+      "releaseDate": "ssss",
+      "episodesId": [
+        "3",
+        "2"
+      ]
+    },
+    {
+      "id": "15",
+      "releaseDate": "ssss",
+      "episodesId": [
+        "3",
+        "2"
+      ]
+    },
+    {
+      "id": "16",
       "releaseDate": "ssss",
       "episodesId": [
         "3",
