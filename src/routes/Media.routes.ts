@@ -70,7 +70,7 @@ router.put('/medias/:id', async (req : Request, res: Response) => {
    
         
         MediaService.updateMedia(id, req.body)
-        res.status(201).send('Utilisateur modifier');
+        res.status(201).send('Media  modifier');
     }
      
       

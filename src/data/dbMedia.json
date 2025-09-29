@@ -41,10 +41,10 @@
       "titre": "É",
       "genre": "adÉ",
       "year": 2,
-      "rating": 243443234243,
+      "rating": 200,
       "type": "film",
       "duration": 200,
-      "watched": true
+      "watched": false
     },
     {
       "id": "6",

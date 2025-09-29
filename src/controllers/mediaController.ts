@@ -4,8 +4,9 @@ import { MediaService } from '../services/MediaService';
 export default class MediaController {
 
   public static async getAllMedia(req: Request, res: Response): Promise<void> {
+    console.log(req.params.id)
+    const users = await MediaService.getAllMedias(req.query);
     
-    const users = await MediaService.getAllMedias();
     res.json(users);
   }
   public static async createMedia(media : Media): Promise<boolean> {

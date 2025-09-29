@@ -12,16 +12,6 @@ const FILM_FIELD = ["titre", "genre", "year", "rating", "duration", "watched"];
 const SERIE_FIELD = ["titre", "genre", "year", "rating", "status", "saisonsId"];
 let field;
 export class MediaService {
-  
-  
-  
-  
-  
-  
-  
-  
- 
-
 
   
  
@@ -39,10 +29,38 @@ export class MediaService {
   //   this.medias = await readFile();
   // }
 
-   public static  getAllMedias(): Media[]{
+   public static  getAllMedias(updatedFields: Partial<any>): Media[]{
     // Logique pour récupérer tous les utilisateurs
     
+    
+
     const data = readData();
+    if(updatedFields.id != undefined){
+       data.medias = data.medias.filter((item: any) => item.id == updatedFields.id);
+    }
+   
+    if(updatedFields.type != undefined){
+      data.medias = data.medias.filter((item: any) => item.type == updatedFields.type);
+    }
+    if(updatedFields.titre != undefined){
+      data.medias = data.medias.filter((item: any) => item.titre == updatedFields.titre);
+    }
+    if(updatedFields.genre != undefined){
+      data.medias = data.medias.filter((item: any) => item.genre == updatedFields.genre);
+    }
+    if(updatedFields.year != undefined){
+      data.medias = data.medias.filter((item: any) => item.year == updatedFields.year);
+    }
+    if(updatedFields.rating != undefined){
+      data.medias = data.medias.filter((item: any) => item.rating == updatedFields.rating);
+    }
+    if(updatedFields.duration != undefined){
+      data.medias = data.medias.filter((item: any) => item.duration == updatedFields.duration);
+    }
+    if(updatedFields.watched != undefined){
+      data.medias = data.medias.filter((item: any) => item.watched == updatedFields.watched);
+    }
+  
     return data.medias;
   }
 
