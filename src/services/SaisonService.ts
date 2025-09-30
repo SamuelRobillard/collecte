@@ -22,20 +22,27 @@ export class SaisonService {
     return data.saisons;
   }
 
-  public static deleteSaison(idtoRemove: string | undefined): boolean {
+ public static  deleteSaison(idtoRemove : string | undefined):boolean {
     const data = readData()
-
-    try {
-      // filtre et retorune tous les éléments dont l'id n'est pas celui a supprimé
-      data.saisons = data.saisons.filter((item: any) => item.id !== idtoRemove);
-      writeData(data)
-      return true;
+    try{
+      if(idtoRemove !== undefined){
+        let convertToList  = [idtoRemove]
+        if(this.allIdExists(convertToList)){
+          data.saisons = data.saisons.filter((item: any) => item.id !== idtoRemove);
+          writeData(data)
+          return true;
+        }
+        return false
+      }
+      return false;
+      
     }
-
-    catch {
+    
+    catch{
       return false;
     }
   }
+
 
   public static getMaxId(): number {
     const data = readData();

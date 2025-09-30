@@ -81,7 +81,7 @@ router.delete('/medias/:id', async (req, res) => {
             res.status(201).send("Media deleted")
         }
         else {
-            res.status(201).send("Media non existant")
+            res.status(400).send("Media non existant")
         }
 
     }

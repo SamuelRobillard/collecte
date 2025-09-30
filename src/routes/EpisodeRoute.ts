@@ -33,7 +33,7 @@ router.delete('/episode/:id', async (req, res) => {
             res.status(201).send("Episode deleted")
         }
         else {
-            res.status(201).send("Episode non existant")
+            res.status(400).send("Episode non existant")
         }
 
     }

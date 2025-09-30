@@ -35,9 +35,15 @@ router.post('/saisons', async (req: Request, res: Response) => {
 });
 
 router.delete('/saison/:id', async (req, res) => {
+    // verifie que le id est un string et qu'il peut etre convertie en nombre
+    if (typeof (req.params.id) == "string" && Number(req.params.id)) {
+        if (await SaisonController.deleteSaison(req.params.id)) {
+            res.status(201).send("Saison deleted")
+        }
+        else {
+            res.status(400).send("Saison non existant")
+        }
 
-    if (await SaisonController.deleteSaison(req.params.id)) {
-        res.status(201).send("saison deleted")
     }
     else {
         res.status(403).send('id non valide');

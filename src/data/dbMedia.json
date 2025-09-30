@@ -355,16 +355,32 @@
       "type": "film",
       "duration": 200,
       "watched": true
+    },
+    {
+      "id": "35",
+      "titre": "É",
+      "genre": "adÉ",
+      "year": 2,
+      "rating": 200,
+      "type": "film",
+      "duration": 200,
+      "watched": true
+    },
+    {
+      "id": "36",
+      "titre": "aaaa111222sss",
+      "genre": "drama",
+      "year": 2020,
+      "rating": 200,
+      "type": "serie",
+      "status": "en_attente",
+      "saisonsId": [
+        "2",
+        "3"
+      ]
     }
   ],
   "episodes": [
-    {
-      "id": "3",
-      "title": "addad",
-      "duration": 1435,
-      "episodeNumber": 1,
-      "watched": false
-    },
     {
       "id": "4",
       "title": "addad",
@@ -406,17 +422,16 @@
       "duration": 1435,
       "episodeNumber": 1,
       "watched": true
+    },
+    {
+      "id": "10",
+      "title": "sss",
+      "duration": 1435,
+      "episodeNumber": 1,
+      "watched": true
     }
   ],
   "saisons": [
-    {
-      "id": "2",
-      "releaseDate": "asd",
-      "episodesId": [
-        1,
-        2
-      ]
-    },
     {
       "id": "3",
       "releaseDate": "asd",
@@ -531,6 +546,14 @@
     },
     {
       "id": "17",
+      "releaseDate": "ssss",
+      "episodesId": [
+        "3",
+        "2"
+      ]
+    },
+    {
+      "id": "18",
       "releaseDate": "ssss",
       "episodesId": [
         "3",
