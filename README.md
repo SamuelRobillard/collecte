@@ -10,8 +10,11 @@ qui permet de gerer des donnes relier a une application de streaming de film et 
 
 
 git clone https://github.com/SamuelRobillard/collecte
+
 cd collecte
+
 npm install
+
 npm start
 
 
