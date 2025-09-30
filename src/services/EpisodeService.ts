@@ -21,10 +21,17 @@ export class EpisodeService {
  public static  deleteEpisode(idtoRemove : string | undefined):boolean {
     const data = readData()
     try{
+      if(idtoRemove !== undefined){
+        let convertToList  = [idtoRemove]
+        if(this.allIdExists(convertToList)){
+          data.episodes = data.episodes.filter((item: any) => item.id !== idtoRemove);
+          writeData(data)
+          return true;
+        }
+        return false
+      }
+      return false;
       
-      data.episodes = data.episodes.filter((item: any) => item.id !== idtoRemove);
-      writeData(data)
-      return true;
     }
     
     catch{
@@ -64,7 +71,7 @@ public static allIdExists(episodesId : String[]) : boolean {
           const data = readData();
     
     
-          const index = data.medias.findIndex((media: any) => media.id == idToFind);
+          const index = data.episodes.findIndex((episode: any) => episode.id == idToFind);
           if (index == -1) return false;
     
           const filteredFields: Record<string, any> = {};
@@ -74,12 +81,12 @@ public static allIdExists(episodesId : String[]) : boolean {
             }
           }
           console.log(filteredFields)
-          data.medias[index] = { ...data.medias[index], ...filteredFields };
-          console.log(data.medias[index])
+          data.episodes[index] = { ...data.episodes[index], ...filteredFields };
+          console.log(data.episodes[index])
           writeData(data);
           return true;
         } catch (err) {
-          console.error("Erreur updateMedia:", err);
+          console.error("Erreur updateEpisode:", err);
           return false;
         }
       }

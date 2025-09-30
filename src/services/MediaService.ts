@@ -53,19 +53,24 @@ public static getAllMedias(filters: SearchFilters): Media[] {
   return filteredMedias;
 }
 
-  public static deleteMedia(idtoRemove: string | undefined): boolean {
-
+  public static  deleteMedia(idtoRemove : string | undefined):boolean {
     const data = readData()
-
-    try {
-
-      data.medias = data.medias.filter((item: any) => item.id !== idtoRemove);
-
-      writeData(data)
-      return true;
+    try{
+      if(idtoRemove !== undefined){
+        let convertToList  = [idtoRemove]
+        if(this.idExists(convertToList)){
+         
+          data.medias = data.medias.filter((item: any) => item.id !== idtoRemove);
+          writeData(data)
+          return true;
+        }
+        return false
+      }
+      return false;
+      
     }
-
-    catch {
+    
+    catch{
       return false;
     }
   }
@@ -74,21 +79,19 @@ public static getAllMedias(filters: SearchFilters): Media[] {
   public static idExists(mediasId: String[]): boolean {
 
     const data = readData();
-
+    let isTrue = true;
     const existingMediasIds = data.medias.map((s: any) => s.id);
     mediasId.forEach((num: String, index: number) => {
-      if (!existingMediasIds.includes(index)) {
-
-
-        return false;
-
+      if (!existingMediasIds.includes(num)) {
+        isTrue = false;
+        
       }
     });
 
 
 
     console.log("yes")
-    return true;
+    return isTrue
   }
 
   public static updateMedia(idToFind: string, updatedFields: Partial<any>): boolean {

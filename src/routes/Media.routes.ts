@@ -75,9 +75,15 @@ router.put('/medias/:id', async (req: Request, res: Response) => {
 });
 
 router.delete('/medias/:id', async (req, res) => {
+    // verifie que le id est un string et qu'il peut etre convertie en nombre
+    if (typeof (req.params.id) == "string" && Number(req.params.id)) {
+        if (await MediaController.deleteMedia(req.params.id)) {
+            res.status(201).send("Media deleted")
+        }
+        else {
+            res.status(201).send("Media non existant")
+        }
 
-    if (await MediaController.deleteMedia(req.params.id)) {
-        res.status(201).send("Média deleted")
     }
     else {
         res.status(403).send('id non valide');
@@ -86,6 +92,7 @@ router.delete('/medias/:id', async (req, res) => {
 
 
 });
+
 
 
 export default router;

@@ -1,16 +1,14 @@
 {
 	"info": {
-		"_postman_id": "48183743-c985703f-308b-4344-a6cb-3d0baa8dc3c4",
+		"_postman_id": "c985703f-308b-4344-a6cb-3d0baa8dc3c4",
 		"name": "tp1",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48183743",
+		"_collection_link": "https://samuelrobillard-2853912.postman.co/workspace/samuelrobillard's-Workspace~928d3be3-de87-4855-8222-057119c71543/collection/48183743-c985703f-308b-4344-a6cb-3d0baa8dc3c4?action=share&source=collection_link&creator=48183743"
 	},
 	"item": [
 		{
 			"name": "getAllUsers",
-			"id": "48183743-639240b7-5a0b-41a1-b549-cd4b100a0380",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -28,17 +26,33 @@
 			"response": []
 		},
 		{
-			"name": "createUsers",
-			"id": "48183743-73e7f1d4-591c-42b2-aa46-cd3fd78eacb0",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
+			"name": "getAllUsersMedia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/5/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"5",
+						"medias"
+					]
+				}
 			},
+			"response": []
+		},
+		{
+			"name": "createUsers",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n    \r\n    \"username\": \"John Does\",\r\n    \"email\" : \"asasdsas@gmail.com\",\r\n    \"password\": \"pass\",\r\n    \"role\": \"user\"\r\n    \r\n  }",
+					"raw": " {\r\n    \r\n    \"username\": \"John Does\",\r\n    \"email\" : \"sss@gmail.com\",\r\n    \"password\": \"pass\",\r\n    \"role\": \"user\",\r\n    \"favorites\" : [1,3,5]\r\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,10 +74,6 @@
 		},
 		{
 			"name": "login",
-			"id": "48183743-d0656a5b-14b0-446b-97b4-fc9fc884d82d",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -91,10 +101,6 @@
 		},
 		{
 			"name": "DeleteMedia",
-			"id": "48183743-0264f457-b1f5-4b24-ae15-9d27669196e1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -114,10 +120,6 @@
 		},
 		{
 			"name": "DeleteEpisodes",
-			"id": "48183743-a51e7b8a-5e1f-41ba-b699-cfe925713c3c",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -137,10 +139,6 @@
 		},
 		{
 			"name": "DeleteSaisons",
-			"id": "48183743-b632f75b-6fd8-4e88-b265-c4795f9452ce",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -160,33 +158,6 @@
 		},
 		{
 			"name": "getAllMedia",
-			"id": "48183743-3d99edb8-63d3-4f1f-947d-a15c357e6c03",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": " {\r\n    \r\n    \"username\": \"John Doe\",\r\n    \"email\" : \"asasd@gmail.com\",\r\n    \"password\": \"pass\"\r\n  }"
-				},
-				"url": {
-					"raw": "{{baseUrl}}/api/medias",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"api",
-						"medias"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getAllMedia Copy",
-			"id": "48183743-5d38c9c3-8547-4c56-98c2-e03ca3314311",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -212,7 +183,6 @@
 		},
 		{
 			"name": "getAllEpisode",
-			"id": "48183743-c345bdb5-8ba6-4398-9bdd-d0d281f3723d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -238,7 +208,6 @@
 		},
 		{
 			"name": "getAllSaisons",
-			"id": "48183743-56146f88-844e-48c0-87e9-db47d4e1633d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -264,10 +233,6 @@
 		},
 		{
 			"name": "createMediaFilm",
-			"id": "48183743-ed4342e8-f66d-4267-960c-1bf82157b9dc",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -294,17 +259,94 @@
 			"response": []
 		},
 		{
-			"name": "createMediaSerie",
-			"id": "48183743-62262d14-ef8c-4e38-9007-7bf04a4a423a",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "createMediaFilmTitreManquant",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n    \r\n      \r\n        \r\n        \"type\" : \"serie\",\r\n        \"titre\": \"aaaa111222sss\",\r\n        \"genre\": \"ad\",\r\n        \"year\": 2,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"status\" : \"en_attente\",\r\n        \"saisonsId\" : [ \"2\", \"3\"\r\n          ]\r\n    \r\n  }",
+					"raw": " {\r\n    \r\n      \r\n        \"type\" : \"film\",\r\n        \"genre\": \"adÉ\",\r\n        \"year\": 2,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"watched\": true\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMediaFilmTitreNonValide",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n      \r\n        \"type\" : \"film\",\r\n        \"titre\" : \"ads/#\",\r\n        \"genre\": \"adÉ\",\r\n        \"year\": 2,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"watched\": true\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMediaFilmDateFuture",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n      \r\n        \"type\" : \"film\",\r\n        \"titre\" : \"ads\",\r\n        \"genre\": \"adÉ\",\r\n        \"year\": 200005,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"watched\": true\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMediaSerie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n      \r\n        \r\n        \"type\" : \"serie\",\r\n        \"titre\": \"aaaa111222sss\",\r\n        \"genre\": \"drama\",\r\n        \"year\": 2020,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"status\" : \"en_attente\",\r\n        \"saisonsId\" : [ \"2\", \"3\"\r\n          ]\r\n    \r\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -326,10 +368,6 @@
 		},
 		{
 			"name": "createEpisode",
-			"id": "48183743-55168ff3-48f7-46ea-abc9-fd0a125a445b",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -357,10 +395,6 @@
 		},
 		{
 			"name": "createSaison",
-			"id": "48183743-b8a0ef57-9a34-4c85-b32b-5fa73f25b0a6",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -388,16 +422,12 @@
 		},
 		{
 			"name": "updateMedia",
-			"id": "48183743-6f7cb42f-73e2-467a-bfc0-d80050ea227a",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n         \r\n    \r\n        \r\n        \"ssss\": 234234,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"sssswwwweeee\": false\r\n\r\n            \r\n       \r\n    \r\n  }",
+					"raw": " {\r\n         \r\n    \r\n        \r\n        \"ssss\": 234234,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"watched\": false\r\n        \r\n            \r\n       \r\n    \r\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -417,16 +447,74 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "updateMedia Copy",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"watched\": false\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/episodes/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"episodes",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMediaFilter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/medias?type=serie&genre=drama&year=2020",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "serie"
+						},
+						{
+							"key": "genre",
+							"value": "drama"
+						},
+						{
+							"key": "year",
+							"value": "2020"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "14079d1f-3752-497c-baac-1aa268efece5",
 				"type": "text/javascript",
 				"packages": {},
-				"requests": {},
 				"exec": [
 					""
 				]
@@ -435,10 +523,8 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "5cc0fc72-3a58-460c-a2ae-083186c3b068",
 				"type": "text/javascript",
 				"packages": {},
-				"requests": {},
 				"exec": [
 					""
 				]
@@ -447,12 +533,8 @@
 	],
 	"variable": [
 		{
-			"key": "basicUrl",
-			"value": ""
-		},
-		{
 			"key": "baseUrl",
-			"value": ""
+			"value": "https://localhost:3000"
 		}
 	]
 }

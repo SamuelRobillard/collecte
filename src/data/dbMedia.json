@@ -1,30 +1,6 @@
 {
   "medias": [
     {
-      "id": "1",
-      "titre": "aaaa111222sss",
-      "genre": "ad",
-      "year": 2,
-      "rating": 200,
-      "type": "serie",
-      "status": "en_attente",
-      "saisons": [
-        {
-          "seasonNumber": 1,
-          "releaseDate": 1,
-          "episodes": [
-            {
-              "id": "1",
-              "title": "addad",
-              "duration": 1435,
-              "episodeNumber": 1,
-              "watched": true
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "3",
       "titre": "É",
       "genre": "adÉ",
@@ -325,16 +301,6 @@
       "watched": true
     },
     {
-      "id": "29",
-      "titre": "É",
-      "genre": "adÉ",
-      "year": 2,
-      "rating": 200,
-      "type": "film",
-      "duration": 200,
-      "watched": true
-    },
-    {
       "id": "30",
       "titre": "aaaa111222sss",
       "genre": "drama",
@@ -346,6 +312,49 @@
         "2",
         "3"
       ]
+    },
+    {
+      "id": "31",
+      "titre": "É",
+      "genre": "adÉ",
+      "year": 2,
+      "rating": 200,
+      "type": "film",
+      "duration": 200,
+      "watched": true
+    },
+    {
+      "id": "32",
+      "titre": "É",
+      "genre": "adÉ",
+      "year": 2,
+      "rating": 200,
+      "type": "film",
+      "duration": 200,
+      "watched": true
+    },
+    {
+      "id": "33",
+      "titre": "aaaa111222sss",
+      "genre": "drama",
+      "year": 2020,
+      "rating": 200,
+      "type": "serie",
+      "status": "en_attente",
+      "saisonsId": [
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "34",
+      "titre": "É",
+      "genre": "adÉ",
+      "year": 2,
+      "rating": 200,
+      "type": "film",
+      "duration": 200,
+      "watched": true
     }
   ],
   "episodes": [
@@ -354,7 +363,7 @@
       "title": "addad",
       "duration": 1435,
       "episodeNumber": 1,
-      "watched": true
+      "watched": false
     },
     {
       "id": "4",
@@ -386,6 +395,13 @@
     },
     {
       "id": "8",
+      "title": "sss",
+      "duration": 1435,
+      "episodeNumber": 1,
+      "watched": true
+    },
+    {
+      "id": "9",
       "title": "sss",
       "duration": 1435,
       "episodeNumber": 1,
@@ -507,6 +523,14 @@
     },
     {
       "id": "16",
+      "releaseDate": "ssss",
+      "episodesId": [
+        "3",
+        "2"
+      ]
+    },
+    {
+      "id": "17",
       "releaseDate": "ssss",
       "episodesId": [
         "3",
