@@ -449,7 +449,7 @@
 			"response": []
 		},
 		{
-			"name": "updateMedia Copy",
+			"name": "updateEpisode",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -463,14 +463,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/api/episodes/3",
+					"raw": "{{baseUrl}}/api/episodes/4",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
 						"episodes",
-						"3"
+						"4"
 					]
 				}
 			},

@@ -13,7 +13,8 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerRoute from "./routes/routes.swagger";
 import swaggerDocument from  '../swagger.json';
 import ValidationRegexService from "./services/validationRegexService";
-
+import http  from 'http'
+import { readData } from "./utils/jsonHandler";
 const win = require('./winston/winstonLogger.ts')
 
 
@@ -62,10 +63,7 @@ app.get('/', (req: Request, res: Response) => {
 
 
 
-// Route simple pour tester
-app.get('/', (req, res) => {
-  res.send('Connexion HTTPS sécurisée');
-});
+
 
 // Créer le serveur HTTPS
 https.createServer(options, app).listen(port, () => {
@@ -75,6 +73,11 @@ https.createServer(options, app).listen(port, () => {
 
 
 
-
+http.createServer((req, res) => {
+  res.writeHead(301, { "Location": `https://localhost:${port}${req.url}` });
+  res.end();
+}).listen(80, () => {
+  console.log(`Serveur HTTP en écoute sur <http://localhost>:${80}`);
+});
 
 
