@@ -1,14 +1,7 @@
-import { json } from 'stream/consumers';
-
 import Episode from '../models/Episode';
-import ValidationRegexService from './validationRegexService';
 import { readData, writeData } from '../utils/jsonHandler';
 
-const fsPromise = require('fs').promises;
-const fileName : string = "./src/data/dbEpisode.json";
-
-
-
+const Episode_FIELD = ["title", "duration", "episodeNumber", "watched"];
 export class EpisodeService {
   
   public static async createEpisode(episode : Episode): Promise<boolean> {
@@ -64,5 +57,31 @@ public static allIdExists(episodesId : String[]) : boolean {
   }
   return true;
     }
+
+
+    public static updateEpiosde(idToFind: string, updatedFields: Partial<any>): boolean {
+        try {
+          const data = readData();
+    
+    
+          const index = data.medias.findIndex((media: any) => media.id == idToFind);
+          if (index == -1) return false;
+    
+          const filteredFields: Record<string, any> = {};
+          for (const key of Episode_FIELD) {
+            if (updatedFields.hasOwnProperty(key)) {
+              filteredFields[key] = updatedFields[key];
+            }
+          }
+          console.log(filteredFields)
+          data.medias[index] = { ...data.medias[index], ...filteredFields };
+          console.log(data.medias[index])
+          writeData(data);
+          return true;
+        } catch (err) {
+          console.error("Erreur updateMedia:", err);
+          return false;
+        }
+      }
   
 }
