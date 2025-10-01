@@ -4,7 +4,7 @@ import { MediaService } from '../services/MediaService';
 import MediaController from '../controllers/mediaController';
 import Film from '../models/Film';
 import Serie from '../models/Serie';
-import { validateMedia } from '../middleswares/auth.middleware';
+import { validateMedia } from '../middleswares/validationMiddleswares';
 import { SaisonService } from '../services/SaisonService';
 const router = Router();
 
