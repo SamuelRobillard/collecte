@@ -9,7 +9,7 @@ qui permet de gerer des donnes relier a une application de streaming de film et 
 
 
 
-git clone https://github.com/SamuelRobillard/collecte
+git clone -b lab1-v2 https://github.com/SamuelRobillard/collecte
 
 cd collecte
 
