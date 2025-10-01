@@ -21,7 +21,9 @@ npm start
 ---
 ## fonctionnalitées
 1 creation et connexion a des comptes utilisateur
+
 2 recherche de films et series par leur titre et d'autre champ.
+
 3 Ajouter des films et séries dans sa liste de films et series préferer
 
 
