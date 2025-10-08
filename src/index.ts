@@ -5,16 +5,17 @@ import loggerRoute from "./routes/logger.routes"
 import mediaRoute from "./routes/Media.routes"
 import episodeRoute from "./routes/EpisodeRoute"
 import saisonRoute from "./routes/SaisonRoute"
+import userRouteV2 from "./routes/v2/user.routes.v2";
 import fs from "fs"
 import https from "https"
 import path from "path";
-import swaggerUi from 'swagger-ui-express';
-import { MongoClient, ServerApiVersion } from 'mongodb'
-import swaggerRoute from "./routes/routes.swagger";
+import swaggerUi from 'swagger-ui-express';;
 import swaggerDocument from  '../swagger.json';
-import ValidationRegexService from "./services/validationRegexService";
 import http  from 'http'
-import { readData } from "./utils/jsonHandler";
+import connectDB from "./data/DbMongo";
+
+import mongoose from "mongoose";
+
 const win = require('./winston/winstonLogger.ts')
 
 
@@ -36,6 +37,8 @@ app.use('/api', loggerRoute)
 app.use('/api', episodeRoute)
 app.use('/api', saisonRoute)
 
+
+app.use('/api/v2', userRouteV2)
 
 const users : UserModel[] = []; // Simuler une base de données en mémoire
 
@@ -83,43 +86,16 @@ http.createServer((req, res) => {
 
 
 
-const uri = "mongodb+srv://6222321:password11@cluster0.nvvmrgg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/e-commerce-db";
 
+const run = async () => {
+  // Connect to MongoDB
+  await connectDB();
 
-const mongoose = require('mongoose');
+  // Create a new user
+ 
 
-async function connectDB() {
-  try {
-    await mongoose.connect(uri); 
-   
-    console.log('MongoDB connected successfully!');
-  } catch (err) {
-    console.error('MongoDB connection error:', err);
-    process.exit(1); // Exit the application on connection failure
-  }
-}
-const mageSchema = new mongoose.Schema({
-  name: {
-      type: String,
-      require: true
-  },
-  power_type: {
-      type: String,
-      require: true
-  },
-  mana_power: Number,
-  health: Number,
-  gold: Number
-})
+  // Save the user to the database
+ 
+};
 
-const Mage = new mongoose.model("Mage", mageSchema)
-
-const mage_1 = new Mage({
-  name: "Takashi",
-  power_type: 'Element',
-  mana_power: 200,
-  health: 1000,
-  gold: 10000
-});
-connectDB();
-mage_1.save();
+run();

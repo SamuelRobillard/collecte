@@ -70,5 +70,25 @@
       "5",
       "7"
     ]
+  },
+  {
+    "id": "8",
+    "username": "John Does",
+    "email": "zfsdg@adsgmail.com",
+    "password": "$2b$10$3nc/3uCxXP51ItmfUXXIKeaZk.o0xbexv4rmxsBd9rr6jCWudevoy",
+    "role": "user",
+    "favorites": [
+      "3",
+      "5",
+      "7"
+    ]
+  },
+  {
+    "id": "9",
+    "username": "John Does",
+    "email": "zfsdg@adsgmasfdil.com",
+    "password": "$2b$10$9OU.6kWHkvqNVyPDXuHVDuQzwO3fiESKQgxiqzDeddj7WRm.wmbSe",
+    "role": "user",
+    "favorites": []
   }
 ]

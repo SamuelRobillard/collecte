@@ -19,6 +19,21 @@ export default class ValidationRegexService {
             return false
         }
     }
+    static validerPassword(input: string): boolean {
+        input = this.cleanString(input)
+        const regex = /^[^\s]{8,}$/;
+        console.log(regex.test(input))
+        if (regex.test(input)) {
+
+            return true
+        } else {
+
+            const error: any = new Error("Password : Entrez un minimum de 8 characteres");
+            error.status = 400;
+            errorLogger.error((`Validation titre échouée: ${error.message} error status : ${error.status}`))
+            return false
+        }
+    }
     static validerGenre(input: string): boolean {
         const regex = /^[A-Za-zÀ-ÿ]+$/;
 

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { UserService } from '../services/user.service';
+
 import User from '../models/User';
 export class UserController {
   public async getAllUsers(req: Request, res: Response): Promise<void> {
@@ -14,7 +15,7 @@ export class UserController {
     res.json(medias);
   }
 
-  public async createUser(user: User): Promise<boolean> {
+  public async createUser(user :  User): Promise<boolean> {
 
     return UserService.createUser(user)
   }
