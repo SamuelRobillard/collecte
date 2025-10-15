@@ -4,7 +4,7 @@ import { errorLogger } from "../winston/winstonError";
 
 export default class ValidationRegexService {
 
-
+    
     static validerTitre(input: string): boolean {
         const regex = /^[A-Za-z0-9À-ÿ ]+$/;
         console.log(regex.test(input))

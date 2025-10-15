@@ -10,7 +10,7 @@ export interface ISeason extends Document {
 const SeasonSchema = new Schema<ISeason>(
   {
     seasonNo: { type: Number, required: true },
-    episodes: { type: Number, required: true },
+    episodes: { type: Number, required: true, min: 1 },
     serieId: { type: Schema.Types.ObjectId, ref: 'Serie', required: true },
   },
   { timestamps: true }
