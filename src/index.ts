@@ -17,6 +17,8 @@ import connectDB from "./data/DbMongo";
 import MovieRouteV2 from "./routes/v2/MovieV2.route"
 import SerieRouteV2 from "./routes/v2/SerieRouteV2"
 import SeasonRouteV2 from "./routes/v2/SeasonRouteV2"
+import EpisodeRouteV2 from "./routes/v2/EpisodeRouteV2"
+import RatingRouteV2 from "./routes/v2/RatingRouteV2"
 
 const win = require('./winston/winstonLogger.ts')
 
@@ -44,6 +46,8 @@ app.use('/api/v2', userRouteV2)
 app.use('/api/v2', MovieRouteV2)
 app.use('/api/v2', SerieRouteV2)
 app.use('/api/v2', SeasonRouteV2)
+app.use('/api/v2', EpisodeRouteV2)
+app.use('/api/v2', RatingRouteV2)
 
 
 
