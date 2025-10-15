@@ -22,14 +22,9 @@ export class UserServiceV2 {
     // Hacher le mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Générer un id unique pour l'utilisateur avec UUID
     
-    let id = await this.getMaxUserId()
-    console.log(id)
-    
-    // Créer un nouvel utilisateur
     const user = new UserMongo({
-      id,  
+       
       username,
       email,
       password: hashedPassword,  // Utilisation du mot de passe haché
@@ -49,13 +44,21 @@ export class UserServiceV2 {
   public static async getAllUsers(): Promise<IUser[]> {
     try {
       const users = await UserMongo.find();
-      this.getMaxUserId()
+      
       return users;
     } catch (error) {
       throw new Error('Erreur lors de la récupération des utilisateurs: ' + error);
     }
   }
 
+ public static async getuserById(id : string ): Promise<IUser | null> {
+    try {
+      const users = await UserMongo.findById(id)
+      return users;
+    } catch (error) {
+      throw new Error('Erreur lors de la récupération des utilisateurs: ' + error);
+    }
+  }
 
   public static getAllMediaOfUser(idUser: string | undefined): Media[] | string {
     const data = readDataUser();
@@ -100,35 +103,30 @@ export class UserServiceV2 {
   }
 
 
-  public static async getMaxUserId(): Promise<String> {
-    try {
+  // public static async getMaxUserId(): Promise<String> {
+  //   try {
 
 
-      const users = await UserMongo.find()
+  //     const users = await UserMongo.find()
 
       
-      .sort({ id: -1 })  // Trie par id de manière décroissante
-      .limit(1) // selectionne seulement le premier element
-      .select("id"); // selectionnne uniquement le champ id
-      const usersid = (users.map((user) => user.id))
+  //     .sort({ id: -1 })  // Trie par id de manière décroissante
+  //     .limit(1) // selectionne seulement le premier element
+  //     .select("id"); // selectionnne uniquement le champ id
+  //     const usersid = (users.map((user) => user.id))
     
-      // transforme le string en nombre pour faire le calcul et le retransforme en string
-      // selectionne le premeir element de la liste, puisque le limit(1) ne retourne toujours que un
-      if(usersid !== null){
-        return String(Number( usersid[0]) + 1)
-      }
-      else{
-        return "1";
-      }
+  //     // transforme le string en nombre pour faire le calcul et le retransforme en string
+  //     // selectionne le premeir element de la liste, puisque le limit(1) ne retourne toujours que un
+  //     if(usersid !== null){
+  //       return String(Number( usersid[0]) + 1)
+  //     }
+  //     else{
+  //       return "1";
+  //     }
       
-    } catch (error) {
-      throw new Error('Erreur lors de la récupération de l\'ID maximal: ' + error);
-    }
-  }
-  static async findById(id: string): Promise<IUser | null> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new Error('ID invalide');
-    }
-    return await UserMongo.findById(id).select('-password'); // on exclut le mot de passe
-  }
+  //   } catch (error) {
+  //     throw new Error('Erreur lors de la récupération de l\'ID maximal: ' + error);
+  //   }
+  // }
+  
 }

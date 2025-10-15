@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 const connectDB = async () => {
-    const uri = "mongodb+srv://6222321:password11@cluster0.nvvmrgg.mongodb.net/e-commerce?retryWrites=true&w=majority&appName=Cluster0";
+    const uri = process.env.DB_URI;
 
 
    

@@ -2,13 +2,14 @@ import { Request, Response } from 'express';
 import { SeasonServiceV2 } from '../../services/v2/SeasonServiceV2';
 import { RatingServiceV2 } from '../../services/v2/RatingServiceV2';
 import { IRating } from '../../models/v2/RatingV2';
+import { AuthRequest } from '../../middleswares/authentificationMiddleswares';
 
 
 export class RatingControllerV2 {
 
   public async getAllRatingOfMovie(req: Request, res: Response): Promise<Response> {
     const movieId = req.params.movieId
-    
+   
     try {
         if(movieId !== undefined){
           const rating = await RatingServiceV2.getAllRatingOfMovie(movieId);
@@ -51,10 +52,10 @@ export class RatingControllerV2 {
   }
 
 
-  public async createRating(req: Request, res: Response): Promise<Response> {
-    const {userId, target, targetId, score, review} = req.body;
-
+  public async createRating(req: AuthRequest, res: Response): Promise<Response> {
+    const { target, targetId, score, review} = req.body;
     
+    const userId = req.user.id;
     
     try {
       const rating = await RatingServiceV2.createRating(userId, target, targetId, score, review );

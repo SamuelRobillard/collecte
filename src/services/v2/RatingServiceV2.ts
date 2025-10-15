@@ -17,13 +17,13 @@ export class RatingServiceV2 {
   
   public static async createRating(userId : string, target : string, targetId : string, score : number, review : string): Promise<any> {
    
-      const userExists = await UserMongo.findById(userId);
+    //   const userExists = await UserMongo.findById(userId);
       
       
       
-    if (!userExists) {
-      throw new Error('Le user n’existe pas');
-    }
+    // if (!userExists) {
+    //   throw new Error('Le user n’existe pas');
+    // }
 
     if(target === 'movie')
     {
@@ -98,13 +98,13 @@ public static async getAllRating(): Promise<IRating[]> {
           const episodes = await EpisodeV2.find({ serieId: serieId }).select('_id');
           
           const episodeIds = episodes.map(ep => ep._id);
-
+         
       const result = await RatingV2.aggregate([
-        // selectionne seulement les ratings qui on le bon movieId
+        
         { $match: { target: 'episode', targetId: { $in: episodeIds } } },
         { $group: { _id: null, averageScore: { $avg: '$score' } } }
     ]);
-        console.log(result)
+        
         const average = result[0].averageScore
       return average;
     }

@@ -11,6 +11,20 @@ export class UserControllerV2 {
       return res.status(500).json({ message: 'Erreur interne du serveur' });
     }
   }
+  public async getUserById(req: Request, res: Response): Promise<Response> {
+    try {
+      const id = req.params.id
+      if(id != undefined){
+        const users = await UserServiceV2.getuserById(id);
+        return res.json(users);
+      }
+      return res.status(400).json({message : "id invalide"})
+    } catch (error) {
+      return res.status(500).json({ message: 'Erreur interne du serveur' });
+    }
+  }
+
+
 
   public async getAllMediaOfUser(req: Request, res: Response): Promise<void> {
 

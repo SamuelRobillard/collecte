@@ -19,6 +19,9 @@ import SerieRouteV2 from "./routes/v2/SerieRouteV2"
 import SeasonRouteV2 from "./routes/v2/SeasonRouteV2"
 import EpisodeRouteV2 from "./routes/v2/EpisodeRouteV2"
 import RatingRouteV2 from "./routes/v2/RatingRouteV2"
+import dotenv from 'dotenv';
+dotenv.config();
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
 const win = require('./winston/winstonLogger.ts')
 
@@ -105,6 +108,7 @@ http.createServer((req, res) => {
 const run = async () => {
   // Connect to MongoDB
   await connectDB();
+  
 
   
  

@@ -12,10 +12,10 @@ export interface IEpisode extends Document {
 const EpisodeSchema = new Schema<IEpisode>(
   {
     seasonId: { type: Schema.Types.ObjectId, ref: 'Season', required: true },
-    epNo: { type: Number, required: true },
+    epNo: { type: Number, required: true, min: 1},
     serieId: { type: Schema.Types.ObjectId, ref: 'Serie', required: true },
     title: { type: String, required: true },
-    durationMin: { type: Number, required: true },
+    durationMin: { type: Number, required: true, min: 1, max: 300 },
   },
   { timestamps: true }
 );

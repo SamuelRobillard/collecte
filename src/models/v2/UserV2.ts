@@ -3,7 +3,7 @@ import Media from '../Media';  // Importer la classe Media si nécessaire
 
 // Définition de l'interface pour User
 interface IUser extends Document {
-    id : string
+    
     username: string;
     email: string;
     password: string;
@@ -13,7 +13,7 @@ interface IUser extends Document {
 
 // Définition du schéma pour User
 const UserMongoSchema: Schema = new Schema({
-    id : {type: String, required: true},
+    
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
