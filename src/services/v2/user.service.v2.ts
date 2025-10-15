@@ -5,6 +5,8 @@ import { MediaService } from '../MediaService';
 import Media from '../../models/Media';
 import {UserMongo, IUser } from "../../models/v2/UserV2";
 import bcrypt from 'bcryptjs';
+import { Types } from 'mongoose';
+import User from '../../models/User';
 
 export class UserServiceV2 {
 
@@ -123,5 +125,10 @@ export class UserServiceV2 {
       throw new Error('Erreur lors de la récupération de l\'ID maximal: ' + error);
     }
   }
-
+  static async findById(id: string): Promise<IUser | null> {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new Error('ID invalide');
+    }
+    return await UserMongo.findById(id).select('-password'); // on exclut le mot de passe
+  }
 }

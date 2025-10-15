@@ -13,7 +13,7 @@ const router = Router();
 const userController = new UserControllerV2();
 
 router.get('/users', userController.getAllUsers);
-router.get('/users/:id/medias', userController.getAllMediaOfUser)
+// router.get('/users/:id/medias', userController.getAllMediaOfUser)
 router.post('/users', ValidateUser,  userController.createUser)
 
 

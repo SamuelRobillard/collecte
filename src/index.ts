@@ -1,4 +1,4 @@
-import { UserModel } from "./models/user.model";
+
 import express, {Request, Response} from 'express';
 import userRoutes from './routes/user.routes';
 import loggerRoute from "./routes/logger.routes"
@@ -10,11 +10,13 @@ import fs from "fs"
 import https from "https"
 import path from "path";
 import swaggerUi from 'swagger-ui-express';;
-import swaggerDocument from  '../swagger.json';
+import swaggerDocument from  '../src/swagger/swaggerApi1.json';
+import swaggerDocumentV2 from  '../src/swagger/swaggerApi2.json';
 import http  from 'http'
 import connectDB from "./data/DbMongo";
-
-import mongoose from "mongoose";
+import MovieRouteV2 from "./routes/v2/MovieV2.route"
+import SerieRouteV2 from "./routes/v2/SerieRouteV2"
+import SeasonRouteV2 from "./routes/v2/SeasonRouteV2"
 
 const win = require('./winston/winstonLogger.ts')
 
@@ -31,16 +33,25 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json());
-app.use('/api', userRoutes)
-app.use('/api', mediaRoute)
-app.use('/api', loggerRoute)
-app.use('/api', episodeRoute)
-app.use('/api', saisonRoute)
+app.use('/api/v1', userRoutes)
+app.use('/api/v1', mediaRoute)
+app.use('/api/v1', loggerRoute)
+app.use('/api/v1', episodeRoute)
+app.use('/api/v1', saisonRoute)
 
 
 app.use('/api/v2', userRouteV2)
+app.use('/api/v2', MovieRouteV2)
+app.use('/api/v2', SerieRouteV2)
+app.use('/api/v2', SeasonRouteV2)
 
-const users : UserModel[] = []; // Simuler une base de données en mémoire
+
+
+
+app.use('/docs/v1', swaggerUi.serveFiles(swaggerDocument), swaggerUi.setup(swaggerDocument));
+app.use('/docs/v2', swaggerUi.serveFiles(swaggerDocumentV2), swaggerUi.setup(swaggerDocumentV2));
+
+
 
 
 
@@ -52,7 +63,7 @@ const options = {
 
 
 // Servir la documentation Swagger via '/api-docs'
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 // Autres routes et middleware Express
 app.use(express.json());
@@ -91,10 +102,7 @@ const run = async () => {
   // Connect to MongoDB
   await connectDB();
 
-  // Create a new user
- 
-
-  // Save the user to the database
+  
  
 };
 
