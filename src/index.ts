@@ -10,8 +10,8 @@ import fs from "fs"
 import https from "https"
 import path from "path";
 import swaggerUi from 'swagger-ui-express';;
-import swaggerDocument from  '../src/swagger/swaggerApi1.json';
-import swaggerDocumentV2 from  '../src/swagger/swaggerApi2.json';
+import swaggerDocument from  './swagger/swaggerApi1.json';
+import swaggerDocumentV2 from  './swagger/swaggerApi2.json';
 import http  from 'http'
 import connectDB from "./data/DbMongo";
 import MovieRouteV2 from "./routes/v2/MovieV2.route"
@@ -21,9 +21,9 @@ import EpisodeRouteV2 from "./routes/v2/EpisodeRouteV2"
 import RatingRouteV2 from "./routes/v2/RatingRouteV2"
 import dotenv from 'dotenv';
 dotenv.config();
-console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
-const win = require('./winston/winstonLogger.ts')
+
+const win = require('./winston/winstonLogger')
 
 
 
