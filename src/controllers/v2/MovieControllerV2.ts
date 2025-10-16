@@ -23,10 +23,10 @@ export class MovieControllerV2 {
     // Vérification si le mot de passe est fourni
     
     try {
-      const user = await MovieServiceV2.creatMovie(title, genre, releaseDate, durationMin, synopsis );
-      return res.status(201).json({ message: 'Movie créé avec succès', user });
+      const movie = await MovieServiceV2.creatMovie(title, genre, releaseDate, durationMin, synopsis );
+      return res.status(201).json({ message: 'Movie créé avec succès', movie });
     } catch (error: unknown) {
-     return res.status(400).json({message : "probleme hehe"})
+     return res.status(400).json({message : "probleme creation de movie"})
     
   }}
 }

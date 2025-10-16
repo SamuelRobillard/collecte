@@ -52,7 +52,7 @@ export default class ValidationRegexV2 {
     }
 
 static validerNom(input: string): boolean {
-        input = this.cleanString(input)
+        
         const regex = /^[a-zA-Z]+$/;
         console.log(regex.test(input))
         if (regex.test(input)) {
@@ -113,6 +113,22 @@ static validerDurationMinEpisode(input: string): boolean {
             return false
         }
     }
+
+static validerReview(input: string): boolean {
+        const regex = /.{1,2000}$/;
+        
+        if (regex.test(input)) {
+
+            return true
+        } else {
+
+            const error: any = new Error("Seuls les lettres, chiffres et espaces sont autorisés.");
+            error.status = 400;
+            errorLogger.error((`Validation titre échouée: ${error.message} error status : ${error.status}`))
+            return false
+        }
+    }
+
     static validerGenre(input: string): boolean {
         const regex = /.{1,30}$/;
 

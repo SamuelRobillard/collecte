@@ -3,7 +3,7 @@ import { Schema, model, Document } from 'mongoose';
 
 export interface ISerie extends Document {
   title: string;
-  genre: string;
+  genre: string[];
   status : string;
   
 }
@@ -11,7 +11,7 @@ export interface ISerie extends Document {
 const SerieSchema = new Schema<ISerie>(
   {
     title: { type: String, required: true },
-    genre: { type: String },
+    genre: [{ type: String }],
     status: { type: String, enum: ['ongoing', 'ended'] },
     
   },

@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import { AuthRequest } from './authentificationMiddleswares'; 
 export const adminMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
    
-    console.log(req.user)
+    
     if (!req.user) {
     return res.status(401).json({ message: 'Utilisateur non authentifié' });
   }
