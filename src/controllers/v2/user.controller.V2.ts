@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { UserService } from '../../services/user.service';
 import {UserServiceV2} from "../../services/v2/user.service.v2";
+import { HttpError } from '../../utils/HttpError';
+import { AuthRequest } from '../../middleswares/authentificationMiddleswares';
 
 export class UserControllerV2 {
   public async getAllUsers(req: Request, res: Response): Promise<Response> {
@@ -25,6 +27,21 @@ export class UserControllerV2 {
   }
 
 
+  public async updateUser (req: AuthRequest, res: Response) : Promise<void> {
+  try {
+    const id = req.user.id
+    const updatedUser = await UserServiceV2.updateUser(id, req.body);
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    if (err instanceof HttpError) {
+      res.status(err.statusCode).json({ message: err.message });
+    } else {
+      console.error(err);
+      res.status(500).json({ message: 'Erreur serveur.' });
+    }
+  }
+};
+
 
   public async getAllMediaOfUser(req: Request, res: Response): Promise<void> {
 
@@ -46,14 +63,10 @@ export class UserControllerV2 {
       const user = await UserServiceV2.createUser(nom, username, email, password, role, favorites);
       return res.status(201).json({ message: 'Utilisateur créé avec succès', user });
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Erreur lors de la création de l\'utilisateur:', error.message);
+      if (error instanceof HttpError) {
+       return res.status(error.statusCode).json({ message: error.message });
         // Vérifie ici que le message est bien passé
-        if (error.message.includes('USER_EXISTS')) {
-          return res.status(409).json({ message: 'L\'utilisateur existe déjà.' });  // Important d'utiliser `return`
-        } else {
-          return res.status(500).json({ message: error.message || 'Erreur interne du serveur' });
-        }
+         
       } else {
         // Si l'erreur n'est pas de type Error, on renvoie une réponse générique
         console.error('Erreur inconnue:', error);

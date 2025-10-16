@@ -38,7 +38,25 @@ export class SerieServiceV2 {
     }
   }
 
+  public static async searchSeries(filters: {
+    title?: string;
+    status?: string;
+  }): Promise<ISerie[]> {
 
+    const query: any = {};
+
+    if (filters.title) {
+      // Recherche insensible à la casse, partielle
+      query.title = { $regex: filters.title, $options: 'i' };
+    }
+
+    if (filters.status) {
+      query.status = filters.status;
+    }
+
+    const series = await SerieV2.find(query);
+    return series;
+  }
   
 
  

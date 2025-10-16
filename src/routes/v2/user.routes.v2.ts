@@ -19,7 +19,7 @@ router.get('/users/:id',authMiddleware, adminMiddleware, userController.getUserB
 // router.get('/users/:id/medias', userController.getAllMediaOfUser)
 router.post('/users',authMiddleware, adminMiddleware, ValidateUser,  userController.createUser)
 
-
+router.patch('/me', authMiddleware, userController.updateUser);
 router.post('/login', async (req, res) => {
     const users: IUser[] = await UserServiceV2.getAllUsers()
     const user = users.find(user => user.email === req.body.email);

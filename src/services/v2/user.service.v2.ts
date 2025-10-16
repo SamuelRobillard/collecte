@@ -7,6 +7,7 @@ import {UserMongo, IUser } from "../../models/v2/UserV2";
 import bcrypt from 'bcryptjs';
 import { Types } from 'mongoose';
 import User from '../../models/User';
+import { HttpError } from '../../utils/HttpError';
 
 export class UserServiceV2 {
 
@@ -16,7 +17,7 @@ export class UserServiceV2 {
     // Vérifier si l'email existe déjà
     const existingUser = await UserMongo.findOne({ email });
     if (existingUser) {
-      throw new Error('Cet email est déjà utilisé.');
+      throw new HttpError('Cet email est déjà utilisé.', 409);
     }
 
     // Hacher le mot de passe
@@ -26,7 +27,7 @@ export class UserServiceV2 {
     const user = new UserMongo({
        
       username,
-      nom,
+      nom, 
       email,
       password: hashedPassword,  // Utilisation du mot de passe haché
       role: role || 'user', // Par défaut 'user'
@@ -40,6 +41,29 @@ export class UserServiceV2 {
     return user;
   }
 
+
+public static async updateUser(id: string, updateData: Partial<IUser>): Promise<IUser> {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new HttpError('ID utilisateur invalide.', 400);
+    }
+
+    // Si on veut mettre à jour le mot de passe, on le hash
+    if (updateData.password) {
+      updateData.password = await bcrypt.hash(updateData.password, 10);
+    }
+
+    const user = await UserMongo.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      { new: true, runValidators: true } // renvoie le document mis à jour
+    );
+
+    if (!user) {
+      throw new HttpError('Utilisateur non trouvé.', 404);
+    }
+
+    return user;
+  }
 
 
   public static async getAllUsers(): Promise<IUser[]> {

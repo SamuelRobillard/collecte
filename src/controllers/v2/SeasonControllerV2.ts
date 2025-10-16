@@ -29,4 +29,22 @@ export class SeasonControllerV2 {
      return res.status(400).json({message : "serie n'existe pas"})
     
   }}
+
+  public async createSeasonWithSerie(req: Request, res: Response): Promise<Response> {
+    const {seasonNo, episodes} = req.body;
+    const serieId = req.params.id
+    
+    
+    try {
+        if(serieId !== undefined){
+            const user = await SeasonServiceV2.createSeason(seasonNo, episodes, serieId );
+            return res.status(201).json({ message: 'Season créé avec succès', user });
+    }
+    else{
+        return res.status(400).json({ message: 'serie non trouve' });
+    }
+    } catch (error: unknown) {
+     return res.status(400).json({message : "serie n'existe pas"})
+    
+  }}
 }
