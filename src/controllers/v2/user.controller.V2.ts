@@ -35,7 +35,7 @@ export class UserControllerV2 {
 
 
   public async createUser(req: Request, res: Response): Promise<Response> {
-    const {username, email, password, role, favorites } = req.body;
+    const {nom, username, email, password, role, favorites } = req.body;
 
     // Vérification si le mot de passe est fourni
     if (!password) {
@@ -43,7 +43,7 @@ export class UserControllerV2 {
     }
 
     try {
-      const user = await UserServiceV2.createUser(username, email, password, role, favorites);
+      const user = await UserServiceV2.createUser(nom, username, email, password, role, favorites);
       return res.status(201).json({ message: 'Utilisateur créé avec succès', user });
     } catch (error: unknown) {
       if (error instanceof Error) {

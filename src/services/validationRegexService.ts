@@ -21,19 +21,72 @@ export default class ValidationRegexService {
     }
     static validerPassword(input: string): boolean {
         input = this.cleanString(input)
-        const regex = /^[^\s]{8,}$/;
+        const regex =/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+
         console.log(regex.test(input))
         if (regex.test(input)) {
 
             return true
         } else {
 
-            const error: any = new Error("Password : Entrez un minimum de 8 characteres");
+            const error: any = new Error("Password : Entrez un minimum de 8 characteres dont une majuscule, un chiffre et un charactere special");
             error.status = 400;
             errorLogger.error((`Validation titre échouée: ${error.message} error status : ${error.status}`))
             return false
         }
     }
+    static validerUsername(input: string): boolean {
+        input = this.cleanString(input)
+        const regex = /^[a-zA-Z0-9_]{3,30}$/;
+        console.log(regex.test(input))
+        if (regex.test(input)) {
+
+            return true
+        } else {
+
+            const error: any = new Error("Username doit avoir entre 3-30 charactere");
+            error.status = 400;
+            errorLogger.error((`Validation username échouée: ${error.message} error status : ${error.status}`))
+            return false
+        }
+    }
+
+static validerNom(input: string): boolean {
+        input = this.cleanString(input)
+        const regex = /^[a-zA-Z]+$/;
+        console.log(regex.test(input))
+        if (regex.test(input)) {
+
+            return true
+        } else {
+
+            const error: any = new Error("Nom doit seulement contenir des lettres");
+            error.status = 400;
+            errorLogger.error((`Validation nom échouée: ${error.message} error status : ${error.status}`))
+            return false
+        }
+    }
+
+    static validerEmail(input: string): boolean {
+        input = this.cleanString(input)
+        const regex = /^[\w.-]+@([\w-]+\.)+[a-zA-Z]{2,}$/
+;
+        console.log(regex.test(input))
+        if (regex.test(input)) {
+
+            return true
+        } else {
+
+            const error: any = new Error("email invalide");
+            error.status = 400;
+            errorLogger.error((`Validation email échouée: ${error.message} error status : ${error.status}`))
+            return false
+        }
+    }
+
+
+
+
     static validerGenre(input: string): boolean {
         const regex = /^[A-Za-zÀ-ÿ]+$/;
 

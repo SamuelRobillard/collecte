@@ -5,6 +5,7 @@ import Media from '../Media';  // Importer la classe Media si nécessaire
 interface IUser extends Document {
     
     username: string;
+    nom : string,
     email: string;
     password: string;
     role: string;
@@ -15,6 +16,7 @@ interface IUser extends Document {
 const UserMongoSchema: Schema = new Schema({
     
     username: { type: String, required: true },
+    nom: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },

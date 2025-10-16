@@ -12,7 +12,7 @@ export class UserServiceV2 {
 
 
   
-  public static async createUser(username: string, email: string, password: string, role: string, favorites: any[]): Promise<any> {
+  public static async createUser(nom : string, username: string, email: string, password: string, role: string, favorites: any[]): Promise<any> {
     // Vérifier si l'email existe déjà
     const existingUser = await UserMongo.findOne({ email });
     if (existingUser) {
@@ -26,6 +26,7 @@ export class UserServiceV2 {
     const user = new UserMongo({
        
       username,
+      nom,
       email,
       password: hashedPassword,  // Utilisation du mot de passe haché
       role: role || 'user', // Par défaut 'user'

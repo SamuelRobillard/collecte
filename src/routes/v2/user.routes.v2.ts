@@ -17,7 +17,7 @@ const userController = new UserControllerV2();
 router.get('/users',authMiddleware, adminMiddleware, userController.getAllUsers);
 router.get('/users/:id',authMiddleware, adminMiddleware, userController.getUserById);
 // router.get('/users/:id/medias', userController.getAllMediaOfUser)
-router.post('/users', ValidateUser,  userController.createUser)
+router.post('/users',authMiddleware, adminMiddleware, ValidateUser,  userController.createUser)
 
 
 router.post('/login', async (req, res) => {
