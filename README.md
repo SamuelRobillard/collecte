@@ -9,7 +9,12 @@ qui permet de gerer des donnes relier a une application de streaming de film et 
 
 
 
-git clone -b lab1-v2 https://github.com/SamuelRobillard/collecte
+git clone -b integrationMongo https://github.com/SamuelRobillard/collecte
+
+```
+/mon-projet │ ├── .env │ └── src ├── config │ ├── production.env │ └── test.env │ ├── controllers ├── middlewares ├── models ├── routes ├── services └── index.ts # Point d'entrée principal en TypeScript
+```
+
 
 cd collecte
 
