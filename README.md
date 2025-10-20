@@ -12,7 +12,7 @@ qui permet de gerer des donnes relier a une application de streaming de film et 
 git clone -b integrationMongo https://github.com/SamuelRobillard/collecte
 
 ```
-/mon-projet
+/collecte
 │
 ├── .env
 │
