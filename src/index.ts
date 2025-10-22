@@ -19,24 +19,21 @@ import SerieRouteV2 from "./routes/v2/SerieRouteV2"
 import SeasonRouteV2 from "./routes/v2/SeasonRouteV2"
 import EpisodeRouteV2 from "./routes/v2/EpisodeRouteV2"
 import RatingRouteV2 from "./routes/v2/RatingRouteV2"
-import dotenv from 'dotenv';
-dotenv.config();
-
+import config from "./config/config";
 
 const win = require('./winston/winstonLogger')
 
 
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = config.port
 const logger = win
 
-// Middleware de logging utilisant Winston
-app.use((req, res, next) => {
-  logger.info(`${req.method} ${req.url}`);
-  
-  next();
-});
+const isProduction = config.env === 'production';
+
+// Middleware HTTPS uniquement en prod derrière proxy
+
+
 app.use(express.json());
 app.use('/api/v1', userRoutes)
 app.use('/api/v1', mediaRoute)
@@ -62,10 +59,7 @@ app.use('/docs/v2', swaggerUi.serveFiles(swaggerDocumentV2), swaggerUi.setup(swa
 
 
 
-const options = {
-  key: fs.readFileSync(path.join("./", 'key.pem')),
-  cert: fs.readFileSync(path.join("./", 'cert.pem'))
-};
+
 
 
 
@@ -73,7 +67,7 @@ const options = {
 
 
 // Autres routes et middleware Express
-app.use(express.json());
+
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello, TypeScript with Express! Connexion sécurisée.');
@@ -87,19 +81,37 @@ app.get('/', (req: Request, res: Response) => {
 
 
 // Créer le serveur HTTPS
-https.createServer(options, app).listen(port, () => {
-  console.log(`Serveur HTTPS en écoute sur <https://localhost>:${port}`);
-});
 
 
 
+  if (config.env === 'production') {
+    // Options SSL
+    const options = {
+      key: fs.readFileSync(path.join('./', 'key.pem')),
+      cert: fs.readFileSync(path.join('./', 'cert.pem'))
+    };
 
-http.createServer((req, res) => {
-  res.writeHead(301, { "Location": `https://localhost:${port}${req.url}` });
-  res.end();
-}).listen(80, () => {
-  console.log(`Serveur HTTP en écoute sur <http://localhost>:${80}`);
-});
+    // Serveur HTTPS
+    https.createServer(options, app).listen(config.port, () => {
+      console.log(`✅ Serveur HTTPS en prod sur https://localhost:${config.port}`);
+    });
+
+    // Serveur HTTP → redirection HTTPS
+    const httpPort = 80;
+    http.createServer((req, res) => {
+      res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
+      res.end();
+    }).listen(httpPort, () => {
+      console.log(`⚡ Serveur HTTP en prod sur http://localhost:${httpPort} → redirection HTTPS`);
+    });
+  } else {
+    // Dev / Test en HTTP simple
+    app.listen(config.port, () => {
+      console.log(`🚀 Serveur ${config.env} en dev sur http://localhost:${config.port}`);
+    });
+  }
+
+
 
 
 

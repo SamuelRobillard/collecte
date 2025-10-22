@@ -1,5 +1,4 @@
 
-
 import { UserService } from '../services/user.service';
 
 test('should return all users', async () => {

@@ -4,22 +4,26 @@
   "description": "le gitignore provient du site topal node",
   "main": "index.js",
   "scripts": {
-    "start": "npx ts-node-dev src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/index.ts",
+    "test-env": "npx cross-env NODE_ENV=test ts-node-dev --respawn --transpile-only src/index.ts",
+    "start": "npx cross-env NODE_ENV=production ts-node-dev --respawn --transpile-only src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
     "exrpess": "^0.0.1-security",
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.20.0",
     "mongoose": "^8.18.3",
+    "swagger-autogen": "^2.23.7",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "uuid": "^13.0.0",

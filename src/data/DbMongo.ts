@@ -1,7 +1,10 @@
+import config from "../config/config";
+
 
 const mongoose = require('mongoose');
 const connectDB = async () => {
-    const uri = process.env.DB_URI;
+  console.log(config.mongoUri)
+    const uri = config.mongoUri
 
 
    

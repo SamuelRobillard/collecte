@@ -3,7 +3,9 @@ import { UserService } from '../../services/user.service';
 import {UserServiceV2} from "../../services/v2/user.service.v2";
 import { HttpError } from '../../utils/HttpError';
 import { AuthRequest } from '../../middleswares/authentificationMiddleswares';
-
+import { IUser } from '../../models/v2/UserV2';
+import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken';
 export class UserControllerV2 {
   public async getAllUsers(req: Request, res: Response): Promise<Response> {
     try {
@@ -26,6 +28,19 @@ export class UserControllerV2 {
     }
   }
 
+
+   public async login(req: Request, res: Response): Promise<void> {
+     const users: IUser[] = await UserServiceV2.getAllUsers()
+        const user = users.find(user => user.email === req.body.email);
+        if (user && await bcrypt.compare(req.body.password, user.password)) {
+            
+            const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
+            const accessToken = jwt.sign({id : user._id,  email: user.email, role : user.role }, JWT_SECRET, { expiresIn: '1h' });
+            res.json({ accessToken });
+        } else {
+            res.status(403).send('email ou mot de passe incorrect');
+        }
+  }
 
   public async updateUser (req: AuthRequest, res: Response) : Promise<void> {
   try {

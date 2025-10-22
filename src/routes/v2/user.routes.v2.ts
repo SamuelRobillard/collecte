@@ -10,6 +10,7 @@ import { UserServiceV2 } from '../../services/v2/user.service.v2';
 import { IUser, UserMongo } from '../../models/v2/UserV2';
 import { authMiddleware, AuthRequest } from '../../middleswares/authentificationMiddleswares';
 import { adminMiddleware } from '../../middleswares/adminMiddleware';
+import {createRateLimiter} from "../../middleswares/rateLimitMiddleware"
 
 const router = Router();
 const userController = new UserControllerV2();
@@ -17,21 +18,14 @@ const userController = new UserControllerV2();
 router.get('/users',authMiddleware, adminMiddleware, userController.getAllUsers);
 router.get('/users/:id',authMiddleware, adminMiddleware, userController.getUserById);
 // router.get('/users/:id/medias', userController.getAllMediaOfUser)
-router.post('/users',authMiddleware, adminMiddleware, ValidateUser,  userController.createUser)
+router.post('/users', ValidateUser,  userController.createUser)
 
-router.patch('/me', authMiddleware, userController.updateUser);
-router.post('/login', async (req, res) => {
-    const users: IUser[] = await UserServiceV2.getAllUsers()
-    const user = users.find(user => user.email === req.body.email);
-    if (user && await bcrypt.compare(req.body.password, user.password)) {
-        
-        const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
-        const accessToken = jwt.sign({id : user._id,  email: user.email, role : user.role }, JWT_SECRET, { expiresIn: '1h' });
-        res.json({ accessToken });
-    } else {
-        res.status(403).send('email ou mot de passe incorrect');
-    }
-});
+router.patch('/me',  authMiddleware, userController.updateUser);
+
+
+const loginLimiter = createRateLimiter('/api/v2/login');
+
+if (loginLimiter) router.post('/login', loginLimiter, userController.login);
 
 
 router.get('/me', authMiddleware, async (req: AuthRequest, res: Response) => {
