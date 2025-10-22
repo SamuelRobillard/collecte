@@ -37,7 +37,9 @@ npm install
 
 
 dev: npm run dev
+
 test: npm run test-env
+
 prod: npm run start
 
 
