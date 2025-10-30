@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { Types } from 'mongoose';
 import {UserMongo, IUser } from "../../models/v2/UserV2";
-import Media from '../../models/Media';
+
 import MovieV2, { IMovie } from '../../models/v2/MovieV2';
 
 export class UserServiceV2 {

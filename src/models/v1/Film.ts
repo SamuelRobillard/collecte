@@ -1,4 +1,4 @@
-import Media from "./Media"
+import Media from "../v1/Media"
 
 export default class Film extends Media {
     type: string

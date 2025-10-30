@@ -26,9 +26,10 @@ export class MovieServiceV2 {
 
     // Sauvegarder l'utilisateur dans la base de données
     await Movie.save();
-
-    // Retourner l'utilisateur créé
-    return Movie;
+    const lastMovie = await MovieV2.findOne().sort({ _id: -1 }).exec();
+    // retourne le dernier film ajouter a la bd (sert pour stocker son id dans postman et le supprimer apres
+    // et etre sur que le filme qu'on supprime existe)
+    return lastMovie;
   }
 
 
@@ -43,6 +44,15 @@ export class MovieServiceV2 {
     }
   }
 
+  public static async getMoviesByGender(genre : String): Promise<IMovie[]> {
+    try {
+      const movies = await MovieV2.find({ genre: { $regex: genre, $options: 'i' } }).exec(); // Recherche insensible à la casse
+      
+      return movies;
+    } catch (error) {
+      throw new Error('Erreur lors de la récupération des movies: ' + error);
+    }
+  }
 
   public static async updateMovie(id: string, updateData: Partial<IMovie>): Promise<IMovie> {
       if (!Types.ObjectId.isValid(id)) {
@@ -78,5 +88,19 @@ export class MovieServiceV2 {
 
       return movie;
     }
+
+    public static async searchMovies(query: Record<string, any>, skip: number, limit: number) {
+      // Récupérer les films correspondant aux critères de recherche avec pagination
+      const Movies = await MovieV2.find(query)
+        .skip(skip)
+        .limit(limit)
+        .exec();
+  
+      // Compter le nombre total de films correspondant aux critères (sans pagination)
+      const total = await MovieV2.countDocuments(query);
+  
+      return { Movies, total };
+    }
+  
  
 }

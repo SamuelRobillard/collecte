@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/v1/user.service';
 
-import User from '../models/User';
+import User from '../../models/v1/User';
 export class UserController {
   public async getAllUsers(req: Request, res: Response): Promise<void> {
 

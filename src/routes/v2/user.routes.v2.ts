@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { UserControllerV2 } from '../../controllers/v2/user.controller.V2';
 import express, { Request, Response } from 'express';
-import User from '../../models/User';
+
 import bcrypt from "bcryptjs";
-import { UserService } from '../../services/user.service';
+
 import jwt from 'jsonwebtoken';
 import { ValidateUser } from '../../middleswares/validationUserMiddleswares';
 import { UserServiceV2 } from '../../services/v2/user.service.v2';

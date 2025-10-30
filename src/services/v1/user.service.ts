@@ -1,8 +1,8 @@
-import User from '../models/User';
-import { readDataUser, writeDataUser } from '../utils/jsonHandlerUser';
-import { readData, writeData } from '../utils/jsonHandler';
+import User from '../../models/v1/User';
+import { readDataUser, writeDataUser } from '../../utils/jsonHandlerUser';
+import { readData, writeData } from '../../utils/jsonHandler';
 import { MediaService } from './MediaService';
-import Media from '../models/Media';
+import Media from '../../models/v1/Media';
 
 
 export class UserService {

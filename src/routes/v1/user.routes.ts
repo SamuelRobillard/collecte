@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { UserController } from '../controllers/user.controller';
+import { UserController } from '../../controllers/v1/user.controller';
 import express, { Request, Response } from 'express';
-import User from '../models/User';
+import User from '../../models/v1/User';
 import bcrypt from "bcryptjs";
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/v1/user.service';
 import jwt from 'jsonwebtoken';
 const router = Router();
 const userController = new UserController();

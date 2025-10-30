@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import ValidationRegexService from "../services/validationRegexService";
+import ValidationRegexService from "../services/v1/validationRegexService";
 
 export function validateMedia(req: Request, res: Response, next: NextFunction) {
 

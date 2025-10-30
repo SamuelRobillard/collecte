@@ -353,7 +353,45 @@
     }
   },
 
-
+"/episode": {
+    "get": {
+      "summary": "Lister les episodes",
+      "tags": ["episodes"],
+      
+      "responses": {
+        "200": {
+          "description": "Liste des episodes"
+        }
+      }
+    },
+    "post": {
+      "summary": "Créer une novelle episode",
+      "tags": ["episodes"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/EpisodeCreate"
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "episode créé"
+        },
+        "400": {
+          "description": "Erreur de requête"
+        }
+      }
+    }
+  },
   "/ratings": {
     "get": {
       "summary": "Lister les ratings",
@@ -475,6 +513,16 @@
           "review": { "type": "string", "example": "Trop bien" }
         },
         "required": ["target", "targetId", "score", "review"]
+      },
+      "EpisodeCreate": {
+        "type": "object",
+        "properties": {
+          "seasonId": { "type": "string", "example": "68efc9ad1527b4772b528b19" },
+          "epNo": { "type": "integer", "example": 1 },
+          "title": { "type": "string", "example": "La guerre des thrones" },
+          "durationMin": { "type": "integer", "example": 200 }
+        },
+        "required": ["seasonId", "epNo", "title", "duratioMin"]
       }
 
       

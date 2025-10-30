@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { UserService } from '../../services/user.service';
+
 import {UserServiceV2} from "../../services/v2/user.service.v2";
 import { HttpError } from '../../utils/HttpError';
 import { AuthRequest } from '../../middleswares/authentificationMiddleswares';
@@ -58,11 +58,7 @@ export class UserControllerV2 {
 };
 
 
-  public async getAllMediaOfUser(req: Request, res: Response): Promise<void> {
-
-    const medias = await UserService.getAllMediaOfUser(req.params.id);
-    res.json(medias);
-  }
+ 
 
 
 

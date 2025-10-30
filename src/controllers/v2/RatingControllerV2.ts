@@ -3,6 +3,8 @@ import { SeasonServiceV2 } from '../../services/v2/SeasonServiceV2';
 import { RatingServiceV2 } from '../../services/v2/RatingServiceV2';
 import { IRating } from '../../models/v2/RatingV2';
 import { AuthRequest } from '../../middleswares/authentificationMiddleswares';
+import { MovieServiceV2 } from '../../services/v2/MovieServiceV2';
+import MovieV2 from '../../models/v2/MovieV2';
 
 
 export class RatingControllerV2 {
@@ -47,6 +49,47 @@ export class RatingControllerV2 {
       const rating = await RatingServiceV2.getAllRating();
       return res.json(rating);
     } catch (error) {
+      return res.status(500).json({ message: 'Erreur interne du serveur' });
+    }
+  }
+  public async recoMovie(req: Request, res: Response): Promise<Response> {
+    try {
+      const genre = req.query.genre;
+      
+      
+      if (typeof(genre) == "string") {
+        const MoviesThatHaveHighRating = [];
+        
+    
+        const moviesGenre = await MovieServiceV2.getMoviesByGender(genre);
+
+       
+        for (const movie of moviesGenre) {
+          
+          const rating = await RatingServiceV2.getAllRatingOfMovie(movie.id);
+          
+            const NumberRating = Number(rating)
+            
+            if (NumberRating > 2) {
+            
+              MoviesThatHaveHighRating.push(movie);
+            }
+          }
+          
+          
+        
+        
+        
+       
+        return res.json(MoviesThatHaveHighRating);
+      }
+  
+     
+      return res.status(401).json({ message: "Genre n'existe pas" });
+      
+
+    } catch (error) {
+   
       return res.status(500).json({ message: 'Erreur interne du serveur' });
     }
   }

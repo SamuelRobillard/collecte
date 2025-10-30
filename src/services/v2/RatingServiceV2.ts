@@ -75,7 +75,7 @@ public static async getAllRating(): Promise<IRating[]> {
       
       return rating
     } catch (error) {
-      throw new Error('Erreur lors de la récupération des episodes: ' + error);
+      return 0
     }
   }
 

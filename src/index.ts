@@ -1,10 +1,10 @@
 
 import express, {Request, Response} from 'express';
-import userRoutes from './routes/user.routes';
-import loggerRoute from "./routes/logger.routes"
-import mediaRoute from "./routes/Media.routes"
-import episodeRoute from "./routes/EpisodeRoute"
-import saisonRoute from "./routes/SaisonRoute"
+import userRoutes from './routes/v1/user.routes';
+import loggerRoute from "./routes/v1/logger.routes"
+import mediaRoute from "./routes/v1/Media.routes"
+import episodeRoute from "./routes/v1/EpisodeRoute"
+import saisonRoute from "./routes/v1/SaisonRoute"
 import userRouteV2 from "./routes/v2/user.routes.v2";
 import fs from "fs"
 import https from "https"

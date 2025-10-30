@@ -9,7 +9,8 @@ import { ValidateMovie } from '../../middleswares/validateMovieMiddlewares';
 const router = Router();
 const movieControllerV2 = new MovieControllerV2()
 
-router.get('/movie', movieControllerV2.getAllMovie);
+
+router.get('/movie', movieControllerV2.searchMovies);
 // router.get('/users/:id/medias', userController.getAllMediaOfUser)
 router.post('/movie', authMiddleware, adminMiddleware,ValidateMovie,  movieControllerV2.createMovie)
 router.patch('/movie/:id', authMiddleware, adminMiddleware, movieControllerV2.updateMovie);
