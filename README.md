@@ -36,7 +36,8 @@ cd collecte
 npm install
 
 
-dev: npm run dev
+dev: npm run dev 
+(utilisé celui ci pour postman)
 
 test: npm run test-env
 
