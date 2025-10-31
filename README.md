@@ -12,22 +12,34 @@ qui permet de gerer des donnes relier a une application de streaming de film et 
 git clone -b integrationMongo https://github.com/SamuelRobillard/collecte
 
 ```
-/collecte
+collecte/
 │
-├── .env
+├── node_modules/
+├── package.json
+├── tsconfig.json
+├── .gitignore
+├── generateKeyCert.js
 │
-└── src
-    ├── config
-    │   ├── production.env
-    │   └── test.env
+└── src/
+    ├── config/
+    │       # mettre le /env icic            
+    │   
     │
-    ├── controllers
-    ├── middlewares
-    ├── models
-    ├── routes
-    ├── services
-    └── index.ts  # Point d'entrée principal en TypeScript
-
+    ├── controllers/         
+    ├── middlewares/         
+    ├── models/             
+    ├── routes/              
+    ├── services/             
+    │
+    ├── utils/               
+    │   
+    │   
+    │   
+    │
+    ├── winston/              
+    │   
+    │
+    └── index.ts             
 ```
 
 
@@ -52,6 +64,6 @@ prod: npm run start
 
 2 recherche de films et series par leur titre et d'autre champ.
 
-3 Ajouter des films et séries dans sa liste de films et series préferer
+
 
 
