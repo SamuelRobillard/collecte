@@ -9,13 +9,53 @@ qui permet de gerer des donnes relier a une application de streaming de film et 
 
 
 
-git clone -b lab1-v2 https://github.com/SamuelRobillard/collecte
+git clone -b integrationMongo https://github.com/SamuelRobillard/collecte
+
+```
+collecte/
+│
+├── node_modules/
+├── package.json
+├── tsconfig.json
+├── .gitignore
+├── generateKeyCert.js
+│
+└── src/
+    ├── config/
+    │       # mettre le /env icic            
+    │   
+    │
+    ├── controllers/         
+    ├── middlewares/         
+    ├── models/             
+    ├── routes/              
+    ├── services/             
+    │
+    ├── utils/               
+    │   
+    │   
+    │   
+    │
+    ├── winston/              
+    │   
+    │
+    └── index.ts             
+```
+
 
 cd collecte
 
 npm install
 
-npm start
+
+dev: npm run dev 
+(utilisé celui ci pour postman)
+
+test: npm run test-env
+
+prod: npm run start
+
+
 
 
 ---
@@ -24,6 +64,6 @@ npm start
 
 2 recherche de films et series par leur titre et d'autre champ.
 
-3 Ajouter des films et séries dans sa liste de films et series préferer
+
 
 
