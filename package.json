@@ -4,6 +4,10 @@
   "description": "le gitignore provient du site topal node",
   "main": "index.js",
   "scripts": {
+    "predev": "node generateKeyCert.js && echo Certificats vérifiés",
+    "prestart": "node generateKeyCert.js && echo Certificats vérifiés",
+
+ 
     "dev": "npx cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/index.ts",
     "test-env": "npx cross-env NODE_ENV=test ts-node-dev --respawn --transpile-only src/index.ts",
     "start": "npx cross-env NODE_ENV=production ts-node-dev --respawn --transpile-only src/index.ts"

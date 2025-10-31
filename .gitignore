@@ -145,8 +145,8 @@ dist
 
 
 
-#key ssl
-cert.pem
+# Certificats SSL
 csr.pem
+cert.pem
 key.pem
 # End of https://www.toptal.com/developers/gitignore/api/node

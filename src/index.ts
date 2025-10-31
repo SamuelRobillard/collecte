@@ -63,10 +63,7 @@ app.use('/docs/v2', swaggerUi.serveFiles(swaggerDocumentV2), swaggerUi.setup(swa
 
 
 
-// Servir la documentation Swagger via '/api-docs'
 
-
-// Autres routes et middleware Express
 
 
 app.get('/', (req: Request, res: Response) => {
@@ -96,7 +93,7 @@ app.get('/', (req: Request, res: Response) => {
       console.log(`✅ Serveur HTTPS en prod sur https://localhost:${config.port}`);
     });
 
-    // Serveur HTTP → redirection HTTPS
+    // Serveur HTTP redirection HTTPS
     const httpPort = 80;
     http.createServer((req, res) => {
       res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
@@ -105,7 +102,7 @@ app.get('/', (req: Request, res: Response) => {
       console.log(`⚡ Serveur HTTP en prod sur http://localhost:${httpPort} → redirection HTTPS`);
     });
   } else {
-    // Dev / Test en HTTP simple
+    // http basic
     app.listen(config.port, () => {
       console.log(`🚀 Serveur ${config.env} en dev sur http://localhost:${config.port}`);
     });
